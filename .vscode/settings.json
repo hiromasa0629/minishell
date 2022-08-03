@@ -1,0 +1,25 @@
+{
+    "42header.username": "hyap",
+    "42header.email": "hyap@student.42kl.edu.my",
+	"files.autoSave": "afterDelay",
+    "editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"window.zoomLevel": 0,
+	"terminal.integrated.scrollback": 99999999999,
+	"workbench.colorCustomizations": {
+		"editor.lineHighlightBackground": "#3f3f3f",
+		"editor.background": "#000000",
+		"sideBar.background": "#000000",
+		"list.hoverBackground": "#3f3f3f",
+		"editorLineNumber.foreground": "#757575",
+		"editorLineNumber.activeForeground": "#ff6a00",
+		"statusBar.background" : "#1A1A1A",
+		"activityBar.background": "#1A1A1A",
+		"tab.inactiveBackground": "#272727",
+		"tab.inactiveForeground": "#f3f3f3",
+		"tab.activeBackground": "#000000"
+	},
+	"workbench.colorTheme": "Dark (Molokai)",
+	"editor.minimap.enabled": false,
+	"editor.autoIndent": false
+}
