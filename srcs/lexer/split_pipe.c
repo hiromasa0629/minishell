@@ -6,11 +6,11 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:50 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/03 11:48:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/04 16:29:24 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	loop_split_ispipe(char c, int quote)
 {
@@ -47,7 +47,7 @@ char	*create_sec(char **line)
 
 	sec_len = section_len(*line);
 	s = (char *)malloc(sizeof(char) * (sec_len + 1));
-	printf("size: %d\n", sec_len + 1);
+	// printf("size: %d\n", sec_len + 1);
 	s[sec_len] = '\0';
 	i = 0;
 	quote = 0;

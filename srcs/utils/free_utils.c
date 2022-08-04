@@ -6,15 +6,15 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 21:44:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/02 15:57:03 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/04 16:31:22 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	del_el(void *content)
 {
-	t_element *ele;
+	t_element	*ele;
 
 	ele = (t_element *)content;
 	free(ele->ele);
@@ -23,7 +23,7 @@ void	del_el(void *content)
 
 void	del_sec(void *content)
 {
-	t_section *sec;
+	t_section	*sec;
 
 	sec = (t_section *)content;
 	free(sec->sec);

@@ -6,11 +6,11 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 18:30:06 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/03 12:03:25 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/04 16:21:08 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_list	*ft_lstnew(void *content)
 {

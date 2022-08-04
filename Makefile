@@ -6,11 +6,11 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 15:26:10 by hyap              #+#    #+#              #
-#    Updated: 2022/07/31 21:00:49 by hyap             ###   ########.fr        #
+#    Updated: 2022/08/04 20:02:44 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = $(wildcard srcs/*.c)
+SRCS = $(wildcard srcs/*.c srcs/lexer/*.c srcs/utils/*.c srcs/parser/*.c)
 
 CFLAGS = -Wall -Werror -Wextra
 

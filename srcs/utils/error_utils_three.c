@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rl_utils.c                                         :+:      :+:    :+:   */
+/*   error_utils_three.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 21:58:52 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/02 14:35:03 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/04 19:12:32 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/04 19:55:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	prompt_new_readline(void)
-{
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+// void	validate_element()
+// int	is_element_good(t_data *data)
+// {
+// 	t_list	*seclst;
 
-void	prompt_error_readline(void)
-{
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-}
+// 	seclst = data->seclst;
+// 	while (seclst)
+// 	{
 
-void	my_add_history(char *s)
-{
-	if (ft_strlen(s) > 0)
-		add_history(s);
-	return ;
-}
+// 		seclst = seclst->next;
+// 	}
+// }

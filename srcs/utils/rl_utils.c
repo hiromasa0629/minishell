@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interactive.c                                      :+:      :+:    :+:   */
+/*   rl_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 16:28:16 by hyap             ###   ########.fr       */
+/*   Created: 2022/07/31 21:58:52 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/04 16:31:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	handle_sigint(int signum)
+void	prompt_new_readline(void)
 {
-	(void)signum;
-	prompt_new_readline();
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-void	eof_exit(char *s)
+void	prompt_error_readline(void)
 {
-	if (!s)
-		exit(1);
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
 }
 
-void	register_signal(void)
+void	ft_add_history(char *s)
 {
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	if (ft_strlen(s) > 0)
+		add_history(s);
+	return ;
 }

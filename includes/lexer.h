@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interactive.c                                      :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 16:28:16 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/04 15:46:53 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/04 16:20:31 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef LEXER_H
+# define LEXER_H
+# include "./clib.h"
+# include "./utils.h"
 
-void	handle_sigint(int signum)
-{
-	(void)signum;
-	prompt_new_readline();
-}
+void	split_pipe(t_data *data, char *line);
+void	split_section(t_section **section);
+void	complete_element(t_section **section);
 
-void	eof_exit(char *s)
-{
-	if (!s)
-		exit(1);
-}
+/* Main */
+void	ft_lexer(t_data *data, char *line);
 
-void	register_signal(void)
-{
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-}
+#endif

@@ -6,11 +6,11 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:55:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/03 13:33:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/04 16:33:44 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_good_pipes(char *s)
 {
@@ -60,7 +60,7 @@ int	is_good_quotes(char *s)
 int	is_good_schar(char *s)
 {
 	int	i;
-	int quote;
+	int	quote;
 
 	i = 0;
 	quote = 0;
@@ -68,7 +68,7 @@ int	is_good_schar(char *s)
 	{
 		if (ft_isquotes(s[i]))
 			check_in_quotes(s[i], &quote);
-		if ((s[i] == '\\' || s[i] == ';') && quote == 0) 
+		if ((s[i] == '\\' || s[i] == ';') && quote == 0)
 			return (0);
 		i++;
 	}
@@ -80,7 +80,6 @@ int	is_good_operator(char *s)
 	int	i;
 	int	j;
 	int	quote;
-	int	quotetwo;
 
 	i = 0;
 	quote = 0;
@@ -88,13 +87,11 @@ int	is_good_operator(char *s)
 	{
 		if (ft_isquotes(s[i]))
 			check_in_quotes(s[i], &quote);
-		if(!is_valid_redirectop(s, &i, quote))
+		if (!is_valid_redirectop(s, &i, quote))
 			return (0);
 		if (ft_isredirectop(s[i]))
 		{
-		// printf("s[i]: %c\n", s[i]);
 			j = 0;
-			quotetwo = 0;
 			while (ft_isspace(s[i + 1 + j]))
 				if (s[i + 1 + j] != '|' && s[i + 1 + (j++)])
 					break ;

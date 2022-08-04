@@ -6,11 +6,11 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:42:20 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/03 13:32:11 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/04 18:26:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_valid_redirectop(char *s, int *i, int quote)
 {

@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interactive.c                                      :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 16:28:16 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/04 16:59:07 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/04 21:24:13 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef PARSEH_H
+# define PARSEH_H
+# include "./clib.h"
+# include "./utils.h"
 
-void	handle_sigint(int signum)
-{
-	(void)signum;
-	prompt_new_readline();
-}
+/* Get strncmp 'n' while moving *env_var */
+int		get_strncmp_n(char **env_var);
 
-void	eof_exit(char *s)
-{
-	if (!s)
-		exit(1);
-}
+void	expand_section(t_section **section, char **envp);
 
-void	register_signal(void)
-{
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
-}
+/* Main */
+void	ft_parser(t_data *data);
+
+#endif

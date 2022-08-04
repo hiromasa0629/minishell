@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interactive.c                                      :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 16:28:16 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/04 16:59:51 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/04 20:51:34 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	handle_sigint(int signum)
+void	ft_parser(t_data *data)
 {
-	(void)signum;
-	prompt_new_readline();
-}
+	t_list		*seclst;
+	t_section	*section;
 
-void	eof_exit(char *s)
-{
-	if (!s)
-		exit(1);
-}
-
-void	register_signal(void)
-{
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	seclst = data->seclst;
+	while (seclst)
+	{
+		section = (t_section *)seclst->content;
+		expand_section(&section, data->envp);
+		ft_lstiter(((t_section *)seclst->content)->ellst, print_ele_content);
+		seclst = seclst->next;
+	}
 }
