@@ -6,27 +6,35 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:53:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 22:08:36 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/06 13:29:47 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_isexpandable(int quo, char *s, char first)
+int	ft_isexpandable(int quo, char *s, int i)
 {
 	int	condone;
 	int	condtwo;
 
 	condone = 0;
 	condtwo = 0;
-	if (quo == 0 && *s == '$' && (ft_isalpha(*(s + 1)) || *(s + 1) == '?'))
+	if (quo == 0 && s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?'))
 		condone = 1;
-	if (*s == first)
+	if (i == 0)
 		return (condone);
-	else if (*(s - 1) != '$')
+	if (s[i - 1] != '$')
 		condtwo = 1;
 	if (condone && condtwo)
 		return (1);
+	return (0);
+}
+
+int	ft_has_quotes(char *s)
+{
+	while (*s)
+		if (ft_isquotes(*(s)++))
+			return (1);
 	return (0);
 }
 
@@ -36,4 +44,25 @@ int	ft_has_envvar(char *s)
 		if (*(s)++ == '$')
 			return (1);
 	return (0);
-}	
+}
+
+int	ft_iscomplete_op(char *s)
+{
+	if (ft_strncmp(s, ">", 1) == 0)
+		return (1);
+	if (ft_strncmp(s, "<", 1) == 0)
+		return (1);
+	if (ft_strncmp(s, ">>", 2) == 0)
+		return (1);
+	if (ft_strncmp(s, "<<", 2) == 0)
+		return (1);
+	return (0);
+}
+
+int	ft_hasslash(char *s)
+{
+	while (*s)
+		if (*(s)++ == '/')
+			return (1);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:16:42 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 19:16:34 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/07 20:49:43 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,17 @@ void	store_element(t_section **section, char **sec, char *op)
 	while (ft_isspace(**sec))
 		(*sec)++;
 	el = (t_element *)malloc(sizeof(t_element));
-	el->numth = (*section)->el_count - 1;
 	if (!op)
 		el->ele = create_ele(sec);
 	else
 		el->ele = op;
 	el->parent = (*section)->numth;
 	el->is_good = 1;
+	el->is_expanded = 0;
+	el->is_absolute = 0;
+	el->red_mode = 0;
+	el->red_type = 0;
+	el->type = 0;
 	ft_lstadd_back(&(*section)->ellst, ft_lstnew(el));
 	(*section)->el_count++;
 	while (ft_isspace(**sec))

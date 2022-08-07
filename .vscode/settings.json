@@ -21,5 +21,8 @@
 	},
 	"workbench.colorTheme": "Dark (Molokai)",
 	"editor.minimap.enabled": false,
-	"editor.autoIndent": false
+	"editor.autoIndent": false,
+	"files.associations": {
+		"minishell.h": "c"
+	}
 }

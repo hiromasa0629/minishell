@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:39:29 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 16:33:16 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/05 15:43:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	print_ele_content(void *content)
 		type = "FILE";
 	else if (ele->type == TYPE_DELIMITER)
 		type = "DELIMITER";
+	else if (ele->type == TYPE_EMPTY)
+		type = "EMPTY";
 	printf("%ssec[%d]ele[%d]: %s, type: %s\n", GREEN, ele->parent, ele->numth, \
 		ele->ele, type);
 }

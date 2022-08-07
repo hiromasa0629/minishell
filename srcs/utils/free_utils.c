@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 21:44:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 16:31:22 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/06 16:24:31 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,11 @@ void	free_all(t_data *data)
 		ft_lstclear(&ellst, del_el);
 	}
 	ft_lstclear(&data->seclst, del_sec);
+}
+
+void	free_execve(t_exec *exec)
+{
+	free(exec->b_path);
+	free(exec->args);
+	free(exec);
 }

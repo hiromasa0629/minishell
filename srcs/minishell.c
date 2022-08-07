@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 20:08:57 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/07 20:42:43 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	register_signal();
 	data.envp = envp;
+	data.env_edited = 0;
+	status = 0;
 	while (1)
 	{
 		printf("%s", WHITE);
@@ -33,9 +35,11 @@ int	main(int ac, char **av, char **envp)
 			return (0);
 		}
 		if (!is_good(line))
-			continue ;
-		ft_lexer(&data, line);
+			return (0);
+			// continue ;
+		ft_lexer(&data, line, data.envp);
 		ft_parser(&data);
+		ft_executor(&data, data.envp);
 		free_all(&data);
 		free(line);
 	}

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:58:22 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 22:05:56 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/07 15:46:23 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ void	free_all(t_data *data);
 
 /* List utils */
 t_list	*ft_lstnew(void *content);
+t_list	*ft_lstlast(t_list *lst);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstadd_back(t_list **lst, t_list *newlst);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	print_ele_content(void *content);
 void	print_sec_content(void *content);
+void	del_el(void *content);
 
 /* Readline utils */
 void	ft_add_history(char *s);
@@ -53,8 +56,17 @@ int		has_redirectop(char *s);
 int		ft_isalpha(char c);
 int		ft_isnum(char c);
 int		ft_issinglequote(char c);
-int		ft_isexpandable(int quo, char *s, char first);
+int		ft_isexpandable(int quo, char *s, int i);
 int		ft_has_envvar(char *s);
-
+int		ft_has_quotes(char *s);
+int		ft_iscomplete_op(char *s);
+int		ft_hasslash(char *s);
+int		ft_isimplemented(char *s);
+int		ft_isrunbuiltins(t_element *el);
+char	**ft_split(char *s, char c);
+char	*concat_two_string(char *one, char *two);
+char	*ft_itoa(int n);
+int		ft_numlen(long long n);
+int		ft_cmd_exist(t_list *ellst);
 
 #endif
