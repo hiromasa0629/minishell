@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 17:05:54 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:14:01 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/08 17:19:49 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/08 20:56:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_pwd(t_data *data)
+void	ft_exit(t_data *data, t_list *cmdlst)
 {
-	char 	**envp;
-	char	*s;
-	int		i;
+	t_helper	h;
 
-	envp = data->envp;
-	i = 0;
-	while (envp[i])
+	if (((t_cmd *)cmdlst->content)->type == TYPE_CMD)
+		cmdlst = cmdlst->next;
+	printf("exit\n");
+	if (!ft_isnum((((t_cmd *)cmdlst->content)->s)[0]))
 	{
-		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
-		{
-			s = envp[i];
-			while (*s != '=')
-				s++;
-			if (*s == '=')
-				s++;
-			printf("%s\n", s);
-		}
-		i++;
+		builtins_error("Numeric argument required\n");
+		return ;
 	}
+	h.len = 0;
+	while (cmdlst)
+	{
+		h.len++;
+		cmdlst = cmdlst->next;
+	}
+	if (h.len > 1)
+		builtins_error("Too many arguments\n");
+	free_all(data);
 }

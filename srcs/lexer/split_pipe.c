@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:50 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 20:47:48 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 15:13:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void	split_pipe(t_data *data, char *line)
 		while (*line == '|')
 			line++;
 	}
+	data->sec_count--;
 }

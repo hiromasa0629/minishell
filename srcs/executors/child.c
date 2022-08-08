@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 20:24:30 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 21:13:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 15:13:53 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	pipe_n_fork(t_helper *h)
 		perror("Child fork");
 }
 
-void	pre_ft_execve(t_data *data, t_list *ellst, char **envp, t_helper par_h)
+void	pre_ft_execve(t_data *data, t_list *ellst, t_helper par_h)
 {
 	t_helper	h;
 
@@ -60,7 +60,11 @@ void	pre_ft_execve(t_data *data, t_list *ellst, char **envp, t_helper par_h)
 			dup2(h.fd[1], STDOUT_FILENO);
 		else 
 			close(h.fd[1]);
-		ft_execve(data, ellst, envp, par_h.fileout);
+		if (!ft_isimplemented(((t_element *)ellst->content)->ele))
+			ft_execve(ellst, data->envp, par_h.fileout);
+		else
+			run_builtins(data, ellst);
+		exit(0) ;
 	}
 	else
 	{
@@ -73,7 +77,34 @@ void	pre_ft_execve(t_data *data, t_list *ellst, char **envp, t_helper par_h)
 	}
 }
 
-void	ft_run_ele(t_list *ellst, char **envp, t_data *data)
+int	run_on_parents(t_list *ellst, t_data *data)
+{
+	t_helper	h;
+
+	h.condone = 0;
+	h.condtwo = 0;
+	while(ellst)
+	{
+		if (((t_element *)ellst->content)->type == TYPE_CMD)
+			break ;
+		ellst = ellst->next;
+	}
+	if (data->sec_count < 2)
+		h.condone = 1;
+	if (ft_strncmp(((t_element *)ellst->content)->ele, "export", 6) == 0)
+		h.condtwo = 1;
+	else if (ft_strncmp(((t_element *)ellst->content)->ele, "unset", 5) == 0)
+		h.condtwo = 1;
+	else if (ft_strncmp(((t_element *)ellst->content)->ele, "pwd", 3) == 0)
+		h.condtwo = 1;
+	else if (ft_strncmp(((t_element *)ellst->content)->ele, "cd", 2) == 0)
+		h.condtwo = 1;
+	if (h.condone && h.condtwo)
+		return (1);
+	return (0);
+}
+
+void	ft_run_ele(t_list *ellst, t_data *data)
 {
 	t_helper	h;
 
@@ -83,7 +114,12 @@ void	ft_run_ele(t_list *ellst, char **envp, t_data *data)
 	if (h.filein > -1)
 		dup2(h.filein, STDIN_FILENO);
 	if (ft_cmd_exist(ellst))
-		pre_ft_execve(data, ellst, envp, h);
+	{
+		if (run_on_parents(ellst, data))
+			run_builtins(data, ellst);
+		else
+			pre_ft_execve(data, ellst, h);
+	}
 	if (h.filein > -1)
 		close(h.filein);
 	if (h.fileout > -1)

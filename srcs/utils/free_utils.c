@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 21:44:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/06 16:24:31 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 20:57:48 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	del_sec(void *content)
 void	free_all(t_data *data)
 {
 	t_list	*ellst;
+	int		i;
 
 	while (data->seclst)
 	{
@@ -41,6 +42,13 @@ void	free_all(t_data *data)
 		ft_lstclear(&ellst, del_el);
 	}
 	ft_lstclear(&data->seclst, del_sec);
+	i = 0;
+	if (data->env_edited)
+	{
+		while ((data->envp)[i])
+			free((data->envp)[i++]);
+		free(data->envp);
+	}
 }
 
 void	free_execve(t_exec *exec)

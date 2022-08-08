@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:15:14 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 21:17:22 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 17:00:32 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,11 @@ t_exec	*construct_execve(t_list *ellst, char **envp)
 	}
 	ellst = ellst->next;
 	exec->args = NULL;
-	if (!ellst)
-		return (exec);
 	store_args(ellst, &exec);
 	return (exec);
 }
 
-void	ft_execve(t_data *data, t_list *ellst, char **envp, int fileout)
+void	ft_execve(t_list *ellst, char **envp, int fileout)
 {
 	t_exec		*exec;
 	t_helper	h;
@@ -123,34 +121,12 @@ void	ft_execve(t_data *data, t_list *ellst, char **envp, int fileout)
 	if (fileout > -1)
 		dup2(fileout, STDOUT_FILENO);
 	h.line = exec->b_path;
-	h.linetwo = NULL;
-printf("line: %s\n", h.line);
-	if (h.line)
+	if (execve(exec->b_path, exec->args, envp) == -1)
 	{
-		while (*(h.line))
-		{
-			if (*(h.line) == '/')
-				h.linetwo = h.line;
-			h.line++;
-		}
-		h.linetwo++;
-	}
-printf("linetwo: %s\n", h.linetwo);
-	if (!ft_isimplemented(h.linetwo))
-	{
-		printf("!implemented\n");
-		if (execve(exec->b_path, exec->args, NULL) == -1)
-		{
-			status = errno;
-			perror("execve");
-		}
-		else
-			status = 0;
+		status = errno;
+		perror("execve");
 	}
 	else
-	{
-		// printf("builtins, %s\n", h.linetwo);
-		run_builtins(data, exec);
-	}
+		status = 0;
 	free(exec);
 }

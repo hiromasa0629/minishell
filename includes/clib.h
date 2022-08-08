@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 17:40:48 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 14:04:52 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_list t_list;
 typedef struct s_helper t_helper;
 typedef struct s_exec t_exec;
 typedef struct stat t_stat;
+typedef struct s_cmd t_cmd;
 
 struct s_list {
 	void	*content;
@@ -88,6 +89,11 @@ struct s_helper {
 struct s_exec {
 	char	*b_path;
 	char	**args;
+};
+
+struct s_cmd {
+	char	*s;
+	int		type;
 };
 
 #endif

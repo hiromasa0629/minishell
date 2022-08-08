@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:51:39 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 20:45:25 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 13:08:26 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void	ft_lexer(t_data *data, char *line, char **envp)
 	t_list		*seclst;
 	t_section	*section;
 
-	printf("%s============================\n", WHITE);
+	// printf("%s============================\n", WHITE);
 	split_pipe(data, line);
 	// printf("%s, %d\n", ((t_section *)data->seclst->content)->sec, data->sec_count);
-	ft_lstiter(data->seclst, print_sec_content);
-	printf("%s----------------------------\n", WHITE);
+	// ft_lstiter(data->seclst, print_sec_content);
+	// printf("%s----------------------------\n", WHITE);
 	seclst = data->seclst;
 	while (seclst)
 	{
@@ -109,12 +109,12 @@ void	ft_lexer(t_data *data, char *line, char **envp)
 		expand_section(&section, envp);
 		skip_empty_ele(&section);
 		assign_numth(&section);
-		ft_lstiter(((t_section *)seclst->content)->ellst, print_ele_content);
-		printf("%s----------------------------\n", WHITE);
+		// ft_lstiter(((t_section *)seclst->content)->ellst, print_ele_content);
+		// printf("%s----------------------------\n", WHITE);
 		complete_element(&section);
-		ft_lstiter(((t_section *)seclst->content)->ellst, print_ele_content);
+		// ft_lstiter(((t_section *)seclst->content)->ellst, print_ele_content);
 		seclst = seclst->next;
-		printf("%s----------------------------\n", WHITE);
+		// printf("%s----------------------------\n", WHITE);
 	}
-	printf("%s============================\n", WHITE);
+	// printf("%s============================\n", WHITE);
 }

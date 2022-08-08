@@ -6,41 +6,66 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:25:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 20:59:53 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 17:14:10 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_builtins_cmd(char *s)
+t_list	*construct_cmd(t_list *ellst)
 {
-	char	*tmp;
+	t_cmd		*cmd;
+	t_list		*cmdlst;
+	t_element	*el;
 
-	tmp = NULL;
-	while (*s)
+	cmdlst = NULL;
+	while(ellst)
 	{
-		if (*s == '/')
-			tmp = s + 1;
-		s++;
+		el = (t_element *)ellst->content;
+		if (el->type == TYPE_ARG || el->type == TYPE_CMD || el->type == TYPE_FLAG)
+		{
+			cmd = (t_cmd *)malloc(sizeof(t_cmd));
+			cmd->s = el->ele;
+			cmd->type = el->type;
+			ft_lstadd_back(&cmdlst, ft_lstnew(cmd));
+		}
+		ellst = ellst->next;
 	}
-	return (tmp);
+	return (cmdlst);
 }
 
-void	run_builtins(t_data *data, t_exec *exec)
+void	free_cmdlst(t_list *cmdlst)
+{
+	t_list	*tmp;
+
+	while (cmdlst)
+	{
+		tmp = cmdlst->next;
+		free(cmdlst);
+		cmdlst = tmp;
+	}
+}
+
+void	run_builtins(t_data *data, t_list *ellst)
 {
 	char	*s;
+	t_list	*cmdlst;
 
-	s = get_builtins_cmd(exec->b_path);
-	if (ft_strncmp(s, "echo", 4) == 0)
-		ft_echo(exec);
-	if (ft_strncmp(s, "cd", 2) == 0)
+	cmdlst = construct_cmd(ellst);
+	s = ((t_cmd *)cmdlst->content)->s;
+	if (!cmdlst)
 		return ;
+	if (ft_strncmp(s, "echo", 4) == 0)
+		ft_echo(cmdlst);
+	if (ft_strncmp(s, "cd", 2) == 0)
+		ft_cd(cmdlst);
 	if (ft_strncmp(s, "pwd", 3) == 0)
 		ft_pwd(data);
 	if (ft_strncmp(s, "export", 6) == 0)
-		ft_export(data, exec);
+		ft_export(data, cmdlst);
 	if (ft_strncmp(s, "unset", 5) == 0)
-		return ;
+		ft_unset(data, cmdlst);
 	if (ft_strncmp(s, "env", 3) == 0)
 		ft_env(data);
+	free_cmdlst(cmdlst);
 }

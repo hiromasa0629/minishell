@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:58:22 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 15:46:23 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 17:10:12 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ char	*concat_two_string(char *one, char *two);
 char	*ft_itoa(int n);
 int		ft_numlen(long long n);
 int		ft_cmd_exist(t_list *ellst);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+void	ft_putstr_fd(int fd, char *s);
 
 #endif

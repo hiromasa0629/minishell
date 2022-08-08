@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executors.h                                        :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/06 14:58:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 15:09:07 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/08 16:22:07 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/08 16:39:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTORS_H
-# define EXECUTORS_H
-# include "./clib.h"
-# include "./utils.h"
+#include "../../includes/minishell.h"
 
-t_exec	*construct_execve(t_list *ellst, char **envp);
-void	ft_execve(t_list *ellst, char **envp, int fileout);
-void	ft_run_ele(t_list *ellst, t_data *data);
-void	run_builtins(t_data *data, t_list *ellst);
-
-
-/* Main */
-void	ft_executor(t_data *data);
-
-#endif
+void	ft_cd(t_list *cmdlst)
+{
+	if (((t_cmd *)cmdlst->content)->type == TYPE_CMD)
+		cmdlst = cmdlst->next;
+	if (!cmdlst)
+		return ;
+	if (chdir(((t_cmd *)cmdlst->content)->s) == -1)
+	{
+		status = errno;
+		perror("cd");
+	}
+	else
+		status = 0;
+}

@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils_five.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 17:05:54 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:14:01 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/08 14:27:08 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/08 17:09:52 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_pwd(t_data *data)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	char 	**envp;
-	char	*s;
-	int		i;
+	size_t	i;
+	size_t	sl;
 
-	envp = data->envp;
+	if (!dest || !src)
+		return (0);
+	sl = ft_strlen((char *)src);
 	i = 0;
-	while (envp[i])
+	if (size == 0)
+		return (sl);
+	while (i < size - 1 && src[i] != '\0')
 	{
-		if (ft_strncmp(envp[i], "PWD=", 4) == 0)
-		{
-			s = envp[i];
-			while (*s != '=')
-				s++;
-			if (*s == '=')
-				s++;
-			printf("%s\n", s);
-		}
+		dest[i] = src[i];
 		i++;
 	}
+	dest[i] = '\0';
+	return (sl);
+}
+
+void	ft_putstr_fd(int fd, char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+		write(fd, &s[i++], 1);
 }

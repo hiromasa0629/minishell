@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 20:42:43 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 17:49:47 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,11 @@ int	main(int ac, char **av, char **envp)
 		line = readline("minishell>");
 		eof_exit(line);
 		ft_add_history(line);
-		if (ft_strncmp(line, "exit", 4) == 0)
-		{
-			free(line);
-			return (0);
-		}
 		if (!is_good(line))
-			return (0);
-			// continue ;
+			continue ;
 		ft_lexer(&data, line, data.envp);
 		ft_parser(&data);
-		ft_executor(&data, data.envp);
+		ft_executor(&data);
 		free_all(&data);
 		free(line);
 	}
