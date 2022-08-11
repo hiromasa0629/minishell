@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:19:34 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:46:18 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:24:55 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_valid_key(char *s)
 
 	h.condone = 0;
 	h.condtwo = 0;
-	if (ft_isalpha(*s))
+	if (ft_isalpha(*s) && !ft_has_special_export(s))
 		h.condone = 1;
 	while (*s)
 		if (*(s)++ == '=')
@@ -36,7 +36,7 @@ void	realloc_envp_export(t_data *data, int *i, char **dptr)
 	{
 		h.len = ft_strlen((data->envp)[*i]);
 		h.line = (char *)malloc(sizeof(char) * (h.len + 1));
-		ft_strlcpy(h.line, (data->envp)[*i], h.len);
+		ft_strlcpy(h.line, (data->envp)[*i], h.len + 1);
 		(h.line)[h.len] = '\0';
 		(dptr)[*i] = h.line;
 	}

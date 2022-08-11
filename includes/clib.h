@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 14:04:52 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 16:10:15 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <termios.h>
 # include "../readline-8.1/include/readline/history.h"
 # include "../readline-8.1/include/readline/readline.h"
 
@@ -30,6 +32,7 @@ typedef struct s_list t_list;
 typedef struct s_helper t_helper;
 typedef struct s_exec t_exec;
 typedef struct stat t_stat;
+typedef struct termios t_termios;
 typedef struct s_cmd t_cmd;
 
 struct s_list {
@@ -43,6 +46,10 @@ struct s_data {
 	char		**envp;
 	int			env_edited;
 	t_list		*seclst;
+	int			pipein;
+	int			pipeout;
+	int			tmpfileout;
+	int			tmpfilein;
 };
 
 struct s_section {
@@ -79,6 +86,8 @@ struct s_helper {
 	int		lentwo;
 	int		filein;
 	int		fileout;
+	int		tmpfilein;
+	int		tmpfileout;
 	char	*line;
 	char	*linetwo;
 	char	*linethree;

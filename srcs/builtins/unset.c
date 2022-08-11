@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:21:58 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 16:03:01 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:25:00 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,15 @@ void	ft_unset(t_data *data, t_list *cmdlst)
 	while (cmdlst)
 	{
 		cmd = (t_cmd *)cmdlst->content;
-		printf("s: %s\n", cmd->s);
-		if (is_key_exist(data, cmd->s))
+		// printf("s: %s\n", cmd->s);
+		if (!ft_isalpha((cmd->s)[0]) || ft_has_special_unset(cmd->s))
 		{
-			printf("here\n");
-			remove_one_env(data, cmd->s);
+			ft_putstr_fd(2, "Invalid identifier\n");
+			status = 1;
+			return ;
 		}
+		if (is_key_exist(data, cmd->s))
+			remove_one_env(data, cmd->s);
 		cmdlst = cmdlst->next;
 	}
 }

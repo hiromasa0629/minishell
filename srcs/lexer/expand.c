@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:04 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 13:05:37 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:07:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	total_new_element_length(char *s, char **envp)
 	h.len = 0;
 	while (s[h.i])
 	{
-		if(ft_issinglequote(s[h.i]))
+		if(ft_isquotes(s[h.i]))
 			check_in_quotes(s[h.i], &(h.quote));
 		if (ft_isexpandable(h.quote, s, h.i))
 		{
@@ -134,10 +134,16 @@ void	expand_element(t_element **el, char **envp)
 	(h.linetwo)[h.len] = '\0';
 	while ((h.line)[h.i])
 	{
-		if (ft_issinglequote((h.line)[h.i]))
+		if (ft_isquotes((h.line)[h.i]))
+		{
 			check_in_quotes((h.line)[h.i], &(h.quote));
+			// if (ft_issinglequote((char)(h.quote)));
+		}
 		if (ft_isexpandable(h.quote, h.line, h.i))
+		{
+			// printf("h.quote: %d\n", h.quote);
 			store_new_ele(envp, &h.linetwo, h.line, &h.i, &h.j);
+		}
 		else
 			(h.linetwo)[h.j++] = (h.line)[h.i++];
 	}

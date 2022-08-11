@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:58:22 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:10:12 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:23:12 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_has_envvar(char *s);
 int		ft_has_quotes(char *s);
 int		ft_iscomplete_op(char *s);
 int		ft_hasslash(char *s);
-int		ft_isimplemented(char *s);
+int		ft_isimplemented(t_list *ellst);
 int		ft_isrunbuiltins(t_element *el);
 char	**ft_split(char *s, char c);
 char	*concat_two_string(char *one, char *two);
@@ -70,5 +70,9 @@ int		ft_numlen(long long n);
 int		ft_cmd_exist(t_list *ellst);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 void	ft_putstr_fd(int fd, char *s);
+int		ft_atoi(const char *s);
+void	exit_error(t_data *data, int err);
+int		ft_has_special_unset(char *s);
+int		ft_has_special_export(char *s);
 
 #endif

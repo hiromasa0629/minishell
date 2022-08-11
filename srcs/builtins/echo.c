@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 18:02:35 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 14:11:31 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 14:30:35 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_echo(t_list *cmdlst)
 	while (h.tmplst)
 	{
 		printf("%s", ((t_cmd *)h.tmplst->content)->s);
-		if (h.tmplst->next)
+		if (h.tmplst->next && (((t_cmd *)h.tmplst->content)->s)[0])
 			printf("%c", ' ');
 		h.tmplst = h.tmplst->next;
 	}

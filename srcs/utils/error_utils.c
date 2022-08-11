@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:55:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/05 16:13:53 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:48:26 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,9 @@ int	is_good(char *s)
 		err_code = OP_ERR;
 	if (err_code != 1)
 	{
-		free(s);
+		// free(s);
 		print_err(error_msg(err_code), prompt_error_readline);
+		status = 1;
 		return (0);
 	}
 	return (err_code);

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:19:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 20:56:02 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 17:02:56 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	ft_exit(t_data *data, t_list *cmdlst)
 
 	if (((t_cmd *)cmdlst->content)->type == TYPE_CMD)
 		cmdlst = cmdlst->next;
-	printf("exit\n");
+	ft_putstr_fd(2, "exit\n");
+	if (!cmdlst)
+		exit_error(data, 0);
 	if (!ft_isnum((((t_cmd *)cmdlst->content)->s)[0]))
 	{
 		builtins_error("Numeric argument required\n");
-		return ;
+		exit_error(data, 255);
 	}
+	status = ft_atoi(((t_cmd *)cmdlst->content)->s);
 	h.len = 0;
 	while (cmdlst)
 	{
@@ -32,5 +35,6 @@ void	ft_exit(t_data *data, t_list *cmdlst)
 	}
 	if (h.len > 1)
 		builtins_error("Too many arguments\n");
-	free_all(data);
+	else
+		exit_error(data, status);
 }

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:27:08 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:09:52 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:27:13 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,48 @@ void	ft_putstr_fd(int fd, char *s)
 		return ;
 	while (s[i])
 		write(fd, &s[i++], 1);
+}
+
+int	ft_atoi(const char *s)
+{
+	int	i;
+	int	ans;
+	int	res;
+
+	ans = 1;
+	i = 0;
+	while (ft_isspace(s[i]))
+		i++;
+	if (s[i] == '-' || s[i] == '+')
+	{
+		if (s[i] == '-')
+			ans = ans * -1;
+		i++;
+	}
+	res = 0;
+	while (ft_isnum(s[i]))
+		res = (res * 10) + (s[i++] - '0');
+	ans = ans * res;
+	return (ans);
+}
+
+void	exit_error(t_data *data, int err)
+{
+	free_all(data);
+	exit(err);
+}
+
+
+int	ft_has_special_unset(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isalpha(s[i]) && !ft_isnum(s[i]) && s[i] != '_')
+			return (1);
+		i++;
+	}
+	return (0);
 }

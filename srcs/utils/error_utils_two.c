@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:42:20 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/04 18:26:21 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 16:02:23 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ int	is_valid_redirectop(char *s, int *i, int quote)
 
 void	print_err(char *s, void (*prompt)(void))
 {
-	printf("%s", s);
+	ft_putstr_fd(2, s);
 	prompt();
 }
 
 char	*error_msg(int err_code)
 {
 	if (err_code == PIPES_ERR)
-		return ("Pipes error");
+		return ("Pipes error\n");
 	if (err_code == QUOTES_ERR)
-		return ("Quotes error");
+		return ("Quotes error\n");
 	if (err_code == SCHAR_ERR)
-		return ("Special character error");
+		return ("Special character error\n");
 	if (err_code == OP_ERR)
-		return ("Redirect operator error");
+		return ("Redirect operator error\n");
 	return (NULL);
 }

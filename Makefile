@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 15:26:10 by hyap              #+#    #+#              #
-#    Updated: 2022/08/06 16:07:43 by hyap             ###   ########.fr        #
+#    Updated: 2022/08/11 13:16:29 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(LIB) $(OBJ) -o $(NAME)
+
+test: $(NAME)
+	./minishell
 
 clean:
 	$(RM) $(OBJ)

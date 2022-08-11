@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:07:28 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 16:48:53 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 16:26:56 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	ft_isfile(t_list *ellst)
 	condone = 0;
 	condtwo = 0;
 	if (!ellst->prev)
-	{
-		printf("fucked\n");
 		return (0);
-	}
 	if (((t_element *)ellst->prev->content)->type == TYPE_REDIRECT)
 		condone = 1;
 	if (ft_strncmp(((t_element *)ellst->prev->content)->ele, "<<", 2) != 0)
@@ -59,14 +56,27 @@ int	ft_iscommand(t_list *ellst)
 
 int	ft_isflag(t_list *ellst)
 {
-	char	*ele;
+	t_element	*el;
+	t_element	*p_el;
+	int			i;
+	int			count;
 
 	if (!ellst->prev)
 		return (0);
-	ele = ((t_element *)ellst->content)->ele;
-	if (ft_has_prev_cmd(ellst) && !ft_has_prev_arg(ellst) && ele[0] == '-')
+	el = (t_element *)ellst->content;
+	p_el = (t_element *)ellst->prev->content;
+	i = 0;
+	count = 0;
+	while ((el->ele)[i])
+		if ((el->ele)[i++] == '-')
+			count++;
+	if (count > 1)
+		return (0);
+	if (ft_has_prev_cmd(ellst) && !ft_has_prev_arg(ellst) && (el->ele)[0] == '-')
 		return (1);
-	if (((t_element *)ellst->prev->content)->type == TYPE_CMD && ele[0] == '-')
+	if (p_el->type == TYPE_CMD && (el->ele)[0] == '-')
+		return (1);
+	if (p_el->type == TYPE_CMD && ft_isquotes((el->ele)[0]) && (el->ele)[1] == '-')
 		return (1);
 	return (0);
 }
@@ -97,7 +107,7 @@ void	assign_types(t_list *ellst, t_element **el)
 		(*el)->type = TYPE_DELIMITER;
 	else if (ft_isflag(ellst))
 		(*el)->type = TYPE_FLAG;
-	else if (!(((*el)->ele)[0]) && !(ellst->next))
+	else if (!(((*el)->ele)[0]))
 		(*el)->type = TYPE_EMPTY;
 	else
 		(*el)->type = TYPE_ARG;

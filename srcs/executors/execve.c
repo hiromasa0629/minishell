@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:15:14 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:00:32 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 16:26:51 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ char	*get_b_path(char **envp, t_list *ellst)
 	found = 0;
 	while (paths[h.i])
 	{
+		if (stat(el->ele, &st) == 0)
+			if (S_ISDIR(st.st_mode))
+				break ;
 		h.line = concat_two_string(paths[h.i++], el->ele);
 		if (stat(h.line, &st) == 0)
 		{
@@ -97,6 +100,7 @@ t_exec	*construct_execve(t_list *ellst, char **envp)
 
 	exec = (t_exec *)malloc(sizeof(t_exec));
 	h.tmplst = ellst;
+	exec->b_path = NULL;
 	while (h.tmplst)
 	{
 		if (((t_element *)h.tmplst->content)->type == TYPE_CMD)
@@ -106,20 +110,20 @@ t_exec	*construct_execve(t_list *ellst, char **envp)
 		}
 		h.tmplst = h.tmplst->next;
 	}
+	if (!exec->b_path)
+		exec->b_path = ((t_element *)ellst->content)->ele;
 	ellst = ellst->next;
 	exec->args = NULL;
 	store_args(ellst, &exec);
 	return (exec);
 }
 
-void	ft_execve(t_list *ellst, char **envp, int fileout)
+void	ft_execve(t_list *ellst, char **envp)
 {
 	t_exec		*exec;
 	t_helper	h;
 
 	exec = construct_execve(ellst, envp);
-	if (fileout > -1)
-		dup2(fileout, STDOUT_FILENO);
 	h.line = exec->b_path;
 	if (execve(exec->b_path, exec->args, envp) == -1)
 	{

@@ -6,14 +6,23 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 13:47:47 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 15:46:15 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/09 10:44:20 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_isimplemented(char *s)
+int	ft_isimplemented(t_list *ellst)
 {
+	char *s;
+
+	while (ellst)
+	{
+		if (((t_element *)ellst->content)->type == TYPE_CMD)
+			break ;
+		ellst = ellst->next;
+	}
+	s = ((t_element *)ellst->content)->ele;
 	if (ft_strncmp(s, "echo", 4) == 0)
 		return (1);
 	if (ft_strncmp(s, "cd", 2) == 0)
@@ -25,6 +34,8 @@ int	ft_isimplemented(char *s)
 	if (ft_strncmp(s, "unset", 5) == 0)
 		return (1);
 	if (ft_strncmp(s, "env", 3) == 0)
+		return (1);
+	if (ft_strncmp(s, "exit", 4) == 0)
 		return (1);
 	return (0);
 }

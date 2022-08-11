@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:51:39 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 13:08:26 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/09 11:22:56 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@
  * linetwo		tmp moving pointer of (*el)->ele
  * linethree	new ele
 *************************************/
-void	split_absolute(t_element **el)
-{
-	t_helper	h;
+// void	split_absolute(t_element **el)
+// {
+// 	t_helper	h;
 
-	h.i = 0;
-	h.line = (*el)->ele;
-	h.linetwo = NULL;
-	while ((h.line)[h.i])
-	{
-		if ((h.line)[h.i] == '/')
-			h.linetwo = &(h.line)[h.i + 1];
-		h.i++;
-	}
-	h.linethree = (char *)malloc(sizeof(char) * (ft_strlen(h.linetwo) + 1));
-	h.linethree[ft_strlen(h.linetwo)] = '\0';
-	h.i = 0;
-	while (*(h.linetwo))
-		h.linethree[h.i++] = *(h.linetwo)++;
-	free((*el)->ele);
-	(*el)->ele = h.linethree;
-}
+// 	h.i = 0;
+// 	h.line = (*el)->ele;
+// 	h.linetwo = NULL;
+// 	while ((h.line)[h.i])
+// 	{
+// 		if ((h.line)[h.i] == '/')
+// 			h.linetwo = &(h.line)[h.i + 1];
+// 		h.i++;
+// 	}
+// 	h.linethree = (char *)malloc(sizeof(char) * (ft_strlen(h.linetwo) + 1));
+// 	h.linethree[ft_strlen(h.linetwo)] = '\0';
+// 	h.i = 0;
+// 	while (*(h.linetwo))
+// 		h.linethree[h.i++] = *(h.linetwo)++;
+// 	free((*el)->ele);
+// 	(*el)->ele = h.linethree;
+// }
 
 void	complete_element(t_section **section)
 {
@@ -53,8 +53,8 @@ void	complete_element(t_section **section)
 	{
 		element = (t_element *)ellst->content;
 		assign_types(ellst, &element);
-		if (element->type == TYPE_CMD && ft_hasslash(element->ele))
-			split_absolute(&element);
+		// if (element->type == TYPE_CMD && ft_hasslash(element->ele))
+		// 	split_absolute(&element);
 		ellst = ellst->next;
 	}
 

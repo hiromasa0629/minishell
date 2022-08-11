@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   utils_six.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 17:16:04 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:25:27 by hyap             ###   ########.fr       */
+/*   Created: 2022/08/11 15:23:28 by hyap              #+#    #+#             */
+/*   Updated: 2022/08/11 15:27:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_env(t_data *data)
+int	ft_has_special_export(char *s)
 {
 	int	i;
+	int	count;
 
 	i = 0;
-	while ((data->envp)[i])
+	count = 0;
+	while (s[i])
 	{
-		// printf("i: %d\n", i);
-		printf("%s\n", (data->envp)[i++]);
+		if (!ft_isalpha(s[i]) && !ft_isnum(s[i]) && s[i] != '=' && s[i] != '_')
+			return (1);
+		if (s[i] == '=')
+			count++;
+		i++;
 	}
+	if (count > 1)
+		return (1);
+	return (0);
 }

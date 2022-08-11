@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:25:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 17:14:10 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/08 22:17:25 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ void	run_builtins(t_data *data, t_list *ellst)
 		ft_unset(data, cmdlst);
 	if (ft_strncmp(s, "env", 3) == 0)
 		ft_env(data);
+	if (ft_strncmp(s, "exit", 4) == 0)
+		ft_exit(data, cmdlst);
 	free_cmdlst(cmdlst);
 }

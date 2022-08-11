@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:59:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 14:12:04 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 14:37:09 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	store_removed_quotes(char **new_ele, char *s)
 			tmp_quote = s[h.i];
 			check_in_quotes(s[h.i], &(h.quote));
 			if (h.quote != 0 && h.quote != tmp_quote)
+			{
 				(*new_ele)[h.j++] = s[h.i++];
+				continue ;
+			}
 		}
 		else
 			(*new_ele)[h.j++] = s[h.i];

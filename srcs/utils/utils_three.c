@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:53:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/06 13:29:47 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 15:06:40 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_isexpandable(int quo, char *s, int i)
 
 	condone = 0;
 	condtwo = 0;
-	if (quo == 0 && s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?'))
+	if ((quo == 0 || quo == '\"') && s[i] == '$' && (ft_isalpha(s[i + 1]) || s[i + 1] == '?'))
 		condone = 1;
 	if (i == 0)
 		return (condone);
