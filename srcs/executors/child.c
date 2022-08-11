@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 20:24:30 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 20:14:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 22:17:27 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	open_files(t_helper *h, t_list *ellst, t_data *data)
 	t_element *el;
 	t_element *p_el;
 
-	h->filein = -1;
-	h->fileout = -1;
 	while (ellst)
 	{
 		el = (t_element *)ellst->content;
@@ -42,24 +40,23 @@ void	open_files(t_helper *h, t_list *ellst, t_data *data)
 
 void	multiple_sections(t_list *ellst, t_data *data, t_list *seclst)
 {
-	t_helper	*h;
-	// char 		c;
+	t_helper	h;
 
-	h = (t_helper *)malloc(sizeof(t_helper));
-	init_fd_helper(h);
-	open_files(h, ellst, data);
-	mulsec_duptwo_files(h, data);
-	pipe_n_fork(h, data, ellst);
-	if (h->pid == 0)
+	h.filein = -1;
+	h.fileout = -1;
+	open_files(&h, ellst, data);
+	pipe_n_fork(&h, data, ellst);
+	if (h.pid == 0)
 	{
-		close((h->fd)[0]);
-		if (data->pipein > -1 && h->filein < 0)
-			dup2(data->pipein, STDIN_FILENO);
-		if (h->fileout < 0 && seclst->next)
-		{
-			dup2((h->fd)[1], STDOUT_FILENO);
-			close((h->fd)[1]);
-		}
+		close((h.fd)[0]);
+		if (data->tmpstdin > -1)
+			dup2(data->tmpstdin, STDIN_FILENO);
+		if (h.filein > -1)
+			dup2(h.filein, STDIN_FILENO);
+		if (seclst->next && h.fileout < 0)
+			dup2((h.fd)[1], STDOUT_FILENO);
+		else if (h.fileout > -1)
+			dup2(h.fileout, STDOUT_FILENO);
 		if (ft_isimplemented(ellst))
 			run_builtins(data, ellst);
 		else
@@ -68,20 +65,18 @@ void	multiple_sections(t_list *ellst, t_data *data, t_list *seclst)
 	}
 	else
 	{
-		close((h->fd)[1]);
-		if (h->fileout < 0 && seclst->next)
-		{
-			data->pipein = (h->fd)[0];
-			// dprintf(2, "pipein: %d\n", data->pipein);
-		}
-		if (!seclst->next)
-			close((h->fd)[0]);
-		if (data->tmpfileout > -1)
-			dup2(data->tmpfileout, 1);
-		if (data->tmpfilein > -1)
-			dup2(data->tmpfilein, 0);
+		close((h.fd)[1]);
+		if (data->tmpstdin > -1)
+			close(data->tmpstdin);
+		if (seclst->next && h.fileout < 0)
+			data->tmpstdin = (h.fd)[0];
+		else
+			close((h.fd)[0]);
+		if (h.filein > -1)
+			close(h.filein);
+		if (h.fileout > -1)
+			close(h.fileout);
 	}
-	free(h);
 }
 
 void	single_section(t_list *ellst, t_data *data)
@@ -109,8 +104,6 @@ void	single_section(t_list *ellst, t_data *data)
 
 void	ft_run_ele(t_list *ellst, t_data *data, t_list *seclst)
 {
-	// if (!ft_cmd_exist(ellst) && !ft_has_heredoc(ellst))
-	// 	return ;
 	if (data->sec_count > 1)
 		multiple_sections(ellst, data, seclst);
 	else

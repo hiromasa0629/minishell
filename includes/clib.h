@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 16:10:15 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/11 20:50:19 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ struct s_data {
 	t_list		*seclst;
 	int			pipein;
 	int			pipeout;
-	int			tmpfileout;
-	int			tmpfilein;
+	int			tmpstdout;
+	int			tmpstdin;
 };
 
 struct s_section {
