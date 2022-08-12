@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:12:06 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:30:22 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ struct s_data {
 	int			pipeout;
 	int			tmpstdout;
 	int			tmpstdin;
+	int			is_tester;
 };
 
 struct s_section {

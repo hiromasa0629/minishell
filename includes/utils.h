@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:58:22 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:23:12 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:31:56 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 /* Initially validate string */
 int		is_valid_redirectop(char *s, int *i, int quote);
-int		is_good(char *s);
+int		is_good(char *s, t_data *data);
 
 /* Print error msg */
 char	*error_msg(int err_code);

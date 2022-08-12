@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 17:19:34 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:34:40 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 17:35:58 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	add_one_env(t_data *data, char *s)
 {
 	t_helper	h;
 
+	h.line = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	(h.line)[ft_strlen(s)] = '\0';
+	h.i = -1;
+	while (s[++h.i])
+		(h.line)[h.i] = s[h.i];
 	h.i = 0;
 	while ((data->envp)[h.i])
 		h.i++;
@@ -57,16 +62,43 @@ void	add_one_env(t_data *data, char *s)
 	else
 		while ((data->envp)[++h.i])
 			(h.dptr)[h.i] = (data->envp)[h.i];
-	(h.dptr)[h.i++] = s;
+	(h.dptr)[h.i++] = h.line;
 	if (data->env_edited)
 		free(data->envp);
 	data->env_edited = 1;
 	data->envp = h.dptr;
 }
 
-void	ft_export(t_data *data, t_list *cmdlst)
+int	is_env_exist(t_data *data, char *s)
 {
 	t_helper	h;
+
+	h.i = 0;
+	while (s[h.i] && s[h.i] != '=')
+		h.i++;
+	h.len = h.i;
+	h.i = -1;
+	h.line = NULL;
+	while ((data->envp)[++h.i])
+	{
+		if (ft_strncmp((data->envp)[h.i], s, h.len + 1) == 0)
+		{
+			if (data->env_edited)
+				free((data->envp)[h.i]);
+			h.line = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+			(h.line)[ft_strlen(s)] = '\0';
+			h.j = -1;
+			while (s[++h.j])
+				(h.line)[h.j] = s[h.j];
+			(data->envp)[h.i] = h.line;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void	ft_export(t_data *data, t_list *cmdlst)
+{
 	t_cmd		*cmd;
 
 	if (((t_cmd *)cmdlst->content)->type == TYPE_CMD)
@@ -76,12 +108,8 @@ void	ft_export(t_data *data, t_list *cmdlst)
 		cmd = (t_cmd *)cmdlst->content;
 		if (check_valid_key(cmd->s))
 		{
-			h.line = (char *)malloc(sizeof(char) * (ft_strlen(cmd->s) + 1));
-			(h.line)[ft_strlen(cmd->s)] = '\0';
-			h.i = -1;
-			while ((cmd->s)[++h.i])
-				(h.line)[h.i] = (cmd->s)[h.i];
-			add_one_env(data, h.line);
+			if (!is_env_exist(data, cmd->s))
+				add_one_env(data, cmd->s);
 		}
 		else
 			builtins_error("Syntax error near '='\n");

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:55:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:09:23 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:31:40 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	is_good_operator(char *s)
 	return (1);
 }
 
-int	is_good(char *s)
+int	is_good(char *s, t_data *data)
 {
 	int		err_code;
 
@@ -118,7 +118,8 @@ int	is_good(char *s)
 		err_code = OP_ERR;
 	if (err_code != 1)
 	{
-		free(s);
+		if (!data->is_tester)
+			free(s);
 		print_err(error_msg(err_code), prompt_error_readline);
 		status = 1;
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:54:30 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:31:29 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_tester_minishell(t_data *data, char *argv)
 {
 	eof_exit(argv);
 	ft_add_history(argv);
-	if (!is_good(argv))
+	if (!is_good(argv, data))
 	{
 		status = 1;
 		return ;
@@ -43,7 +43,7 @@ void	ft_minishell(t_data *data)
 			continue ;
 		}
 		ft_add_history(line);
-		if (!is_good(line))
+		if (!is_good(line, data))
 			continue ;
 		ft_lexer(data, line, data->envp);
 		ft_parser(data);
@@ -63,8 +63,10 @@ int	main(int ac, char **av, char **envp)
 	data.envp = envp;
 	data.env_edited = 0;
 	status = 0;
+	data.is_tester = 0;
 	if (ac >= 3 && !ft_strncmp(av[1], "-c", 3))
 	{
+		data.is_tester = 1;
 		ft_tester_minishell(&data, av[2]);
 		exit(status);
 	}
