@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:27:08 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:27:13 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:15:28 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	exit_error(t_data *data, int err)
 	free_all(data);
 	exit(err);
 }
-
 
 int	ft_has_special_unset(char *s)
 {

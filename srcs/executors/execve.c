@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:15:14 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 16:26:51 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:40:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ char	*get_b_path(char **envp, t_list *ellst)
 	found = 0;
 	while (paths[h.i])
 	{
-		if (stat(el->ele, &st) == 0)
-			if (S_ISDIR(st.st_mode))
-				break ;
 		h.line = concat_two_string(paths[h.i++], el->ele);
 		if (stat(h.line, &st) == 0)
 		{
@@ -97,6 +94,7 @@ t_exec	*construct_execve(t_list *ellst, char **envp)
 {
 	t_helper	h;
 	t_exec		*exec;
+	t_stat		st;
 
 	exec = (t_exec *)malloc(sizeof(t_exec));
 	h.tmplst = ellst;
@@ -105,6 +103,9 @@ t_exec	*construct_execve(t_list *ellst, char **envp)
 	{
 		if (((t_element *)h.tmplst->content)->type == TYPE_CMD)
 		{
+			if (stat(((t_element *)ellst->content)->ele, &st) == 0)
+				if (S_ISDIR(st.st_mode))
+					break ;
 			exec->b_path = get_b_path(envp, h.tmplst);
 			break ;
 		}

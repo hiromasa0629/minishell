@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:04 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:07:46 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:07:50 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 *	j: ft_strncmp 'n'
 *	k: retain the initial (*i)
 ****************************************/
-char *find_env(char **envp, char *s, int *i)
+char	*find_env(char **envp, char *s, int *i)
 {
 	t_helper	h;
 	char		*path;
@@ -50,6 +50,7 @@ char *find_env(char **envp, char *s, int *i)
  *	quote	check closing quote
  *	len: 	return value
 ****************************************/
+
 int	total_new_element_length(char *s, char **envp)
 {
 	t_helper	h;
@@ -59,7 +60,7 @@ int	total_new_element_length(char *s, char **envp)
 	h.len = 0;
 	while (s[h.i])
 	{
-		if(ft_isquotes(s[h.i]))
+		if (ft_isquotes(s[h.i]))
 			check_in_quotes(s[h.i], &(h.quote));
 		if (ft_isexpandable(h.quote, s, h.i))
 		{
@@ -88,26 +89,27 @@ int	total_new_element_length(char *s, char **envp)
  *	
  *	line:		targetted env value
 ****************************************/
-void	store_new_ele(char **envp, char **new_ele, char *s, int *i, int *j)
+
+void	store_new_ele(char **envp, char **new_ele, char *s, t_helper *par_h)
 {
 	t_helper	h;
 
-	if (s[*i] == '$' && s[*i + 1] == '?')
+	if (s[par_h->i] == '$' && s[par_h->i + 1] == '?')
 	{
 		h.i = 0;
 		h.line = ft_itoa(status);
 		while ((h.line)[h.i])
-			(*new_ele)[(*j)++] = (h.line)[h.i++];
+			(*new_ele)[(par_h->j)++] = (h.line)[h.i++];
 		free(h.line);
-		*i = *i + 2;
+		par_h->i = par_h->i + 2;
 	}
 	else
 	{	
-		h.line = find_env(envp, s, i);
+		h.line = find_env(envp, s, &(par_h->i));
 		if (!(h.line))
 			return ;
 		while (*(h.line))
-			(*new_ele)[(*j)++] = *(h.line)++;
+			(*new_ele)[(par_h->j)++] = *(h.line)++;
 	}
 }
 
@@ -120,6 +122,7 @@ void	store_new_ele(char **envp, char **new_ele, char *s, int *i, int *j)
  *	line: 	(*el)->ele
  *	linetwo	newly malloced element
 ****************************************/
+
 void	expand_element(t_element **el, char **envp)
 {
 	t_helper	h;
@@ -129,21 +132,14 @@ void	expand_element(t_element **el, char **envp)
 	h.j = 0;
 	h.line = (*el)->ele;
 	h.len = total_new_element_length(h.line, envp);
-	// printf("len: %d\n", h.len + 1);
 	h.linetwo = (char *)malloc(sizeof(char) * (h.len + 1));
 	(h.linetwo)[h.len] = '\0';
 	while ((h.line)[h.i])
 	{
 		if (ft_isquotes((h.line)[h.i]))
-		{
 			check_in_quotes((h.line)[h.i], &(h.quote));
-			// if (ft_issinglequote((char)(h.quote)));
-		}
 		if (ft_isexpandable(h.quote, h.line, h.i))
-		{
-			// printf("h.quote: %d\n", h.quote);
-			store_new_ele(envp, &h.linetwo, h.line, &h.i, &h.j);
-		}
+			store_new_ele(envp, &h.linetwo, h.line, &h);
 		else
 			(h.linetwo)[h.j++] = (h.line)[h.i++];
 	}
@@ -166,10 +162,10 @@ void	expand_section(t_section **section, char **envp)
 			expand_element(&el, envp);
 		else if (ellst->prev && ft_has_envvar(el->ele))
 		{
-			p_el = (t_element *)ellst->prev->content; 
+			p_el = (t_element *)ellst->prev->content;
 			if (ft_strncmp(p_el->ele, "<<", 2) != 0)
 				expand_element(&el, envp);
-		}		
+		}
 		ellst = ellst->next;
 	}
 }

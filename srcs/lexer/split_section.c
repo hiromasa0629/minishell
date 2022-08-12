@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 16:16:42 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 20:49:43 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:09:10 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*create_ele(char **sec)
 
 	el_len = element_len(*sec);
 	s = (char *)malloc(sizeof(char) * (el_len + 1));
-	// printf("%sel_len: %d\n", WHITE, el_len + 1);
 	s[el_len] = '\0';
 	i = 0;
 	quote = 0;

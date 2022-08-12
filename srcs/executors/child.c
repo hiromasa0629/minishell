@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 20:24:30 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 22:17:27 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:55:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	open_files(t_helper *h, t_list *ellst, t_data *data)
 {
-	t_element *el;
-	t_element *p_el;
+	t_element	*el;
+	t_element	*p_el;
 
 	while (ellst)
 	{
@@ -38,6 +38,27 @@ void	open_files(t_helper *h, t_list *ellst, t_data *data)
 	}
 }
 
+void	multiple_sections_child(t_helper *h, t_data *data, t_list *seclst)
+{
+	t_list	*ellst;
+
+	ellst = ((t_section *)seclst->content)->ellst;
+	close((h->fd)[0]);
+	if (data->tmpstdin > -1)
+		dup2(data->tmpstdin, STDIN_FILENO);
+	if (h->filein > -1)
+		dup2(h->filein, STDIN_FILENO);
+	if (seclst->next && h->fileout < 0)
+		dup2((h->fd)[1], STDOUT_FILENO);
+	else if (h->fileout > -1)
+		dup2(h->fileout, STDOUT_FILENO);
+	if (ft_isimplemented(ellst))
+		run_builtins(data, ellst);
+	else
+		ft_execve(ellst, data->envp);
+	exit(status);
+}
+
 void	multiple_sections(t_list *ellst, t_data *data, t_list *seclst)
 {
 	t_helper	h;
@@ -47,22 +68,7 @@ void	multiple_sections(t_list *ellst, t_data *data, t_list *seclst)
 	open_files(&h, ellst, data);
 	pipe_n_fork(&h, data, ellst);
 	if (h.pid == 0)
-	{
-		close((h.fd)[0]);
-		if (data->tmpstdin > -1)
-			dup2(data->tmpstdin, STDIN_FILENO);
-		if (h.filein > -1)
-			dup2(h.filein, STDIN_FILENO);
-		if (seclst->next && h.fileout < 0)
-			dup2((h.fd)[1], STDOUT_FILENO);
-		else if (h.fileout > -1)
-			dup2(h.fileout, STDOUT_FILENO);
-		if (ft_isimplemented(ellst))
-			run_builtins(data, ellst);
-		else
-			ft_execve(ellst, data->envp);
-		exit(status);
-	}
+		multiple_sections_child(&h, data, seclst);
 	else
 	{
 		close((h.fd)[1]);
@@ -81,31 +87,23 @@ void	multiple_sections(t_list *ellst, t_data *data, t_list *seclst)
 
 void	single_section(t_list *ellst, t_data *data)
 {
-	t_helper	*h;
+	t_helper	h;
 
-	h = (t_helper *)malloc(sizeof(t_helper));
-	init_fd_helper(h);
-	h->pid = -1;
-	open_files(h, ellst, data);
-	if (!ft_cmd_exist(ellst))
+	init_fd_helper(&h);
+	if (!ft_cmd_exist(ellst) && !ft_has_heredoc(ellst))
 		return ;
-	duptwo_files(h);
-	pipe_n_fork(h, data, ellst);
-	if (h->pid == 0)
+	open_files(&h, ellst, data);
+	duptwo_files(&h);
+	pipe_n_fork(&h, data, ellst);
+	if (h.pid == 0)
 	{
-		ft_execve(ellst, data->envp);
+		if (!(!ft_cmd_exist(ellst) && ft_has_heredoc(ellst)))
+		{
+			ft_execve(ellst, data->envp);
+		}
 		exit(status);
 	}
-	else if (h->pid == -1)
+	else if (ft_isimplemented(ellst))
 		run_builtins(data, ellst);
-	close_files(h);
-	free(h);
-}
-
-void	ft_run_ele(t_list *ellst, t_data *data, t_list *seclst)
-{
-	if (data->sec_count > 1)
-		multiple_sections(ellst, data, seclst);
-	else
-		single_section(ellst, data);
+	close_files(&h);
 }

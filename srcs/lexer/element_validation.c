@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 12:07:28 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 16:26:56 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:59:23 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,13 @@ int	ft_isflag(t_list *ellst)
 			count++;
 	if (count > 1)
 		return (0);
-	if (ft_has_prev_cmd(ellst) && !ft_has_prev_arg(ellst) && (el->ele)[0] == '-')
+	if (ft_has_prev_cmd(ellst) && !ft_has_prev_arg(ellst) && \
+		(el->ele)[0] == '-')
 		return (1);
 	if (p_el->type == TYPE_CMD && (el->ele)[0] == '-')
 		return (1);
-	if (p_el->type == TYPE_CMD && ft_isquotes((el->ele)[0]) && (el->ele)[1] == '-')
+	if (p_el->type == TYPE_CMD && ft_isquotes((el->ele)[0]) && \
+		(el->ele)[1] == '-')
 		return (1);
 	return (0);
 }

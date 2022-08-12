@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:41:22 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:54:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,15 @@ void	ft_minishell(t_data *data)
 
 	while (1)
 	{
-		data->tmpfilein = -1;
-		data->tmpfileout = -1;
+		data->tmpstdin = -1;
+		data->tmpstdout = -1;
 		line = readline("minishell>");
 		eof_exit(line);
+		if (*line == '\0')
+		{
+			free(line);
+			continue ;
+		}
 		ft_add_history(line);
 		if (!is_good(line))
 			continue ;

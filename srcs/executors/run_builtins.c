@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:25:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 22:17:25 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:59:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ t_list	*construct_cmd(t_list *ellst)
 	t_element	*el;
 
 	cmdlst = NULL;
-	while(ellst)
+	while (ellst)
 	{
 		el = (t_element *)ellst->content;
-		if (el->type == TYPE_ARG || el->type == TYPE_CMD || el->type == TYPE_FLAG)
+		if (el->type == TYPE_ARG || el->type == TYPE_CMD || \
+			el->type == TYPE_FLAG)
 		{
 			cmd = (t_cmd *)malloc(sizeof(t_cmd));
 			cmd->s = el->ele;
@@ -58,7 +59,7 @@ void	run_builtins(t_data *data, t_list *ellst)
 	if (ft_strncmp(s, "echo", 4) == 0)
 		ft_echo(cmdlst);
 	if (ft_strncmp(s, "cd", 2) == 0)
-		ft_cd(cmdlst);
+		ft_cd(cmdlst, data);
 	if (ft_strncmp(s, "pwd", 3) == 0)
 		ft_pwd(data);
 	if (ft_strncmp(s, "export", 6) == 0)

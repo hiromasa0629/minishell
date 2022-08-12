@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 21:02:16 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 20:50:29 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:57:18 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	close_files(t_helper *h)
 		dup2(h->tmpfilein, 0);
 		close(h->filein);
 		close(h->tmpfilein);
-
 	}
 	if (h->tmpfileout > -1)
 	{
@@ -39,20 +38,6 @@ void	duptwo_files(t_helper *h)
 	if (h->fileout > -1)
 	{
 		h->tmpfileout = dup(STDOUT_FILENO);
-		dup2(h->fileout, STDOUT_FILENO);
-	}
-}
-
-void	mulsec_duptwo_files(t_helper *h, t_data *data)
-{
-	if (h->filein > -1)
-	{
-		data->tmpstdin = dup(STDIN_FILENO);
-		dup2(h->filein, STDIN_FILENO);
-	}
-	if (h->fileout > -1)
-	{
-		data->tmpstdout = dup(STDOUT_FILENO);
 		dup2(h->fileout, STDOUT_FILENO);
 	}
 }

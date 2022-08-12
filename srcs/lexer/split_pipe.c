@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:50 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/08 15:13:30 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:09:08 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*create_sec(char **line)
 
 	sec_len = section_len(*line);
 	s = (char *)malloc(sizeof(char) * (sec_len + 1));
-	// printf("size: %d\n", sec_len + 1);
 	s[sec_len] = '\0';
 	i = 0;
 	quote = 0;

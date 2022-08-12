@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 22:15:40 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:58:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,26 @@ char	*store_new_line(char *line, t_data *data)
 		{
 			h.i++;
 			h.linetwo = get_env_string(line, &(h.i), data);
-			dprintf(2, "h.linetwo: %s\n", h.linetwo);
 			if (!h.linetwo)
 				continue ;
 			while ((h.linetwo)[h.j])
-			{
-				(h.line)[h.k++]  = (h.linetwo)[h.j++];
-				// dprintf(2, "h.line[h.k]: %c, h.linetwo[h.j]: %c\n", (h.line)[h.k - 1], (h.linetwo)[h.j - 1]);
-			}
+				(h.line)[h.k++] = (h.linetwo)[h.j++];
 		}
 		else
-		{
 			(h.line)[h.k++] = line[h.i++];
-			// dprintf(2, "h.line[h.k]: %c, h.linetwo[h.j]: %c\n", (h.line)[h.k - 1], (h.linetwo)[h.j - 1]);
-		}
 	}
-	dprintf(2, "h.len: %d, h.line: %s\n", h.len, h.line);
 	return (h.line);
+}
+
+char	*get_delimiter(t_list *ellst)
+{
+	while (ellst)
+	{
+		if (((t_element *)ellst->content)->type == TYPE_DELIMITER)
+			return (((t_element *)ellst->content)->ele);
+		ellst = ellst->next;
+	}
+	return (NULL);
 }
 
 int	ft_heredoc(t_list *ellst, t_data *data)
@@ -103,20 +106,12 @@ int	ft_heredoc(t_list *ellst, t_data *data)
 
 	h.tmplst = ellst;
 	pipe(h.fd);
-	while (h.tmplst)
-	{
-		if (((t_element *)h.tmplst->content)->type == TYPE_DELIMITER)
-		{
-			h.linetwo = ((t_element *)h.tmplst->content)->ele;
-			break ;
-		}
-		h.tmplst = h.tmplst->content;
-	}
+	h.linetwo = get_delimiter(ellst);
 	h.line = readline("heredoc>");
-	if (!h.line)
-		return (-1);
 	while (ft_strncmp(h.line, h.linetwo, ft_strlen(h.linetwo)) != 0)
 	{
+		if (!h.line)
+			break ;
 		new_line = store_new_line(h.line, data);
 		free(h.line);
 		write((h.fd)[1], new_line, ft_strlen(new_line));

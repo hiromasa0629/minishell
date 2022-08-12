@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 19:59:39 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/07 16:40:51 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:59:33 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	assign_redirect_type(t_element **el)
 		(*el)->red_type = RED_INPUT;
 		(*el)->red_mode = 0;
 	}
-	// printf("(*el)->ele: %s, (*el)->type: %d\n", (*el)->ele, (*el)->red_type);
 }
 
 int	ft_has_prev_cmd(t_list *ellst)

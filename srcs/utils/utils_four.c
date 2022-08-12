@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 13:47:47 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/09 10:44:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:15:35 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_isimplemented(t_list *ellst)
 {
-	char *s;
+	char	*s;
 
-	while (ellst)
-	{
-		if (((t_element *)ellst->content)->type == TYPE_CMD)
-			break ;
+	if (!ellst)
+		return (0);
+	while (((t_element *)ellst->content)->type != TYPE_CMD)
 		ellst = ellst->next;
-	}
+	if (!ellst)
+		return (0);
 	s = ((t_element *)ellst->content)->ele;
 	if (ft_strncmp(s, "echo", 4) == 0)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:59:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 14:37:09 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 12:12:17 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	remove_quotes(t_element **el)
 
 	h.line = (*el)->ele;
 	h.len = length_without_quotes(h.line);
-	// printf("len: %d\n", h.len + 1);
 	h.linetwo = (char *)malloc(sizeof(char) * (h.len + 1));
 	h.linetwo[h.len] = '\0';
 	store_removed_quotes(&(h.linetwo), h.line);
@@ -100,8 +99,6 @@ void	ft_parser(t_data *data)
 				remove_quotes(&el);
 			ellst = ellst->next;
 		}
-		// ft_lstiter(((t_section *)seclst->content)->ellst, print_ele_content);
 		seclst = seclst->next;
 	}
-	// printf("%s============================\n", WHITE);
 }

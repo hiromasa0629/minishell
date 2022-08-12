@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 20:50:19 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:12:06 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/param.h>
 # include <termios.h>
 # include "../readline-8.1/include/readline/history.h"
 # include "../readline-8.1/include/readline/readline.h"
@@ -84,6 +85,7 @@ struct s_helper {
 	int		quote;
 	int		len;
 	int		lentwo;
+	int		count;
 	int		filein;
 	int		fileout;
 	int		tmpfilein;

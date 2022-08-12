@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:21:58 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:25:00 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/12 11:36:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	is_key_exist(t_data *data, char *s)
 		h.j = 0;
 		while ((data->envp)[h.i][h.j])
 		{
-			// printf("[h.j]: %c\n", (data->envp)[h.i][h.j]);
 			if ((data->envp)[h.i][h.j] != s[h.j] && s[h.j] != '\0')
 				break ;
 			if ((data->envp)[h.i][h.j] == '=' && s[h.j] == '\0')
@@ -96,7 +95,6 @@ void	ft_unset(t_data *data, t_list *cmdlst)
 	while (cmdlst)
 	{
 		cmd = (t_cmd *)cmdlst->content;
-		// printf("s: %s\n", cmd->s);
 		if (!ft_isalpha((cmd->s)[0]) || ft_has_special_unset(cmd->s))
 		{
 			ft_putstr_fd(2, "Invalid identifier\n");
