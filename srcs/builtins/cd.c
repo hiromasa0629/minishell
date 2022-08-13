@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:22:07 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:34:05 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 08:50:59 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*store_new_pwd(void)
 
 	tmp = "PWD=";
 	h.linetwo = get_wd();
-	h.len = ft_strlen(h.linetwo);
+	h.len = ft_strlen(h.linetwo) + ft_strlen(tmp);
 	h.line = (char *)malloc(sizeof(char) * (h.len + 1));
 	(h.line)[h.len] = '\0';
 	h.i = -1;

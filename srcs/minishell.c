@@ -6,11 +6,36 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:31:29 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:12:20 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	realloc_initial_envp(t_data *data)
+{
+	t_helper	h;
+
+	h.i = 0;
+	while ((data->envp)[h.i])
+		h.i++;
+	h.dptr = (char **)malloc(sizeof(char *) * (h.i + 1));
+	(h.dptr)[h.i] = NULL;
+	h.i = 0;
+	while ((data->envp)[h.i])
+	{
+		h.len = ft_strlen((data->envp)[h.i]);
+		h.line = (char *)malloc(sizeof(char) * (h.len + 1));
+		(h.line)[h.len] = '\0';
+		h.j = -1;
+		while ((data->envp)[h.i][++h.j])
+			(h.line)[h.j] = (data->envp)[h.i][h.j];
+		(h.dptr)[h.i] = h.line;
+		h.i++;
+	}
+	data->envp = h.dptr;
+	data->env_edited = 1;
+}
 
 void	ft_tester_minishell(t_data *data, char *argv)
 {
@@ -21,6 +46,7 @@ void	ft_tester_minishell(t_data *data, char *argv)
 		status = 1;
 		return ;
 	}
+	realloc_initial_envp(data);
 	ft_lexer(data, argv, data->envp);
 	ft_parser(data);
 	ft_executor(data);
@@ -45,6 +71,7 @@ void	ft_minishell(t_data *data)
 		ft_add_history(line);
 		if (!is_good(line, data))
 			continue ;
+		realloc_initial_envp(data);
 		ft_lexer(data, line, data->envp);
 		ft_parser(data);
 		ft_executor(data);

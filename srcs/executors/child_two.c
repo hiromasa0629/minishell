@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 21:02:16 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:57:18 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:53:38 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	close_files(t_helper *h)
 		close(h->tmpfilein);
 	}
 	if (h->tmpfileout > -1)
-	{
+	{	
 		dup2(h->tmpfileout, 1);
 		close(h->fileout);
 		close(h->tmpfileout);
@@ -57,7 +57,7 @@ int	ft_has_heredoc(t_list *ellst)
 }
 
 void	pipe_n_fork(t_helper *h, t_data *data, t_list *ellst)
-{	
+{
 	if (data->sec_count > 1)
 	{
 		if (pipe(h->fd) < 0)

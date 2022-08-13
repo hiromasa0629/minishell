@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:39:10 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:58:02 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:53:00 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void	ft_executor(t_data *data)
 	}
 	else
 		single_section(((t_section *)seclst->content)->ellst, data);
-	if (status == 0)
-	{
-		while (waitpid(-1, &status, 0) > 0)
-			;
-		status = WEXITSTATUS(status);
-	}
+	while (waitpid(-1, &status, 0) > 0)
+		;
+	status = WEXITSTATUS(status);
 }

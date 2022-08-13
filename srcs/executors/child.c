@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 20:24:30 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:55:30 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:53:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	single_section(t_list *ellst, t_data *data)
 {
 	t_helper	h;
 
+	h.pid = -2;
 	init_fd_helper(&h);
 	if (!ft_cmd_exist(ellst) && !ft_has_heredoc(ellst))
 		return ;
@@ -98,12 +99,10 @@ void	single_section(t_list *ellst, t_data *data)
 	if (h.pid == 0)
 	{
 		if (!(!ft_cmd_exist(ellst) && ft_has_heredoc(ellst)))
-		{
 			ft_execve(ellst, data->envp);
-		}
 		exit(status);
 	}
-	else if (ft_isimplemented(ellst))
+	else if (data->sec_count == 1 && ft_isimplemented(ellst))
 		run_builtins(data, ellst);
 	close_files(&h);
 }

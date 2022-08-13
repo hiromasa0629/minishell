@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 15:23:28 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:15:43 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:27:44 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_has_special_export(char *s)
 
 	i = 0;
 	count = 0;
-	while (s[i])
+	while (s[i] && s[i] != '=')
 	{
 		if (!ft_isalpha(s[i]) && !ft_isnum(s[i]) && s[i] != '=' && s[i] != '_')
 			return (1);

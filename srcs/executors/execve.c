@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:15:14 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:40:02 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:47:51 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	**get_paths(char **envp)
 
 	h.i = 0;
 	path = NULL;
+	paths = NULL;
 	while (envp[h.i])
 	{
 		if (ft_strncmp(envp[h.i], "PATH=", 5) == 0)
@@ -32,7 +33,8 @@ char	**get_paths(char **envp)
 		}
 		h.i++;
 	}
-	paths = ft_split(path, ':');
+	if (path)
+		paths = ft_split(path, ':');
 	return (paths);
 }
 
@@ -45,6 +47,8 @@ char	*get_b_path(char **envp, t_list *ellst)
 	int			found;
 
 	paths = get_paths(envp);
+	if (!paths)
+		return (NULL);
 	el = (t_element *)ellst->content;
 	h.i = 0;
 	found = 0;

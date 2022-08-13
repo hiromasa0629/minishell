@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:21:58 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:36:02 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/13 09:29:59 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,21 @@ void	realloc_envp_unset(t_data *data, char **dptr, char *s)
 {
 	t_helper	h;
 
-	h.i = -1;
-	while ((data->envp)[++h.i])
+	h.i = 0;
+	h.j = 0;
+	while ((data->envp)[h.i])
 	{
 		if (ft_strncmp((data->envp)[h.i], s, ft_strlen(s)) == 0)
-		{
-			if (data->env_edited)
-				free((data->envp)[h.i++]);
-			else
-				continue ;
-		}
-		if (!data->env_edited)
-			(dptr)[h.i] = (data->envp)[h.i];
-		else
-		{
-			h.len = ft_strlen((data->envp)[h.i]);
-			h.line = (char *)malloc(sizeof(char) * (h.len + 1));
-			ft_strlcpy(h.line, (data->envp)[h.i], h.len);
-			(h.line)[h.len] = '\0';
-			(dptr)[h.i] = h.line;
-		}
+			free((data->envp)[h.i++]);
+		if (!(data->envp)[h.i])
+			break ;
+		h.len = ft_strlen((data->envp)[h.i]);
+		h.line = (char *)malloc(sizeof(char) * (h.len + 1));
+		ft_strlcpy(h.line, (data->envp)[h.i], h.len + 1);
+		(h.line)[h.len] = '\0';
+		(dptr)[h.j] = h.line;
+		h.i++;
+		h.j++;
 	}
 }
 
