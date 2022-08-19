@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:11:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:58:21 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/19 20:06:49 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*store_new_line(char *line, t_data *data)
 
 	h.len = new_line_length(line, data);
 	h.line = (char *)malloc(sizeof(char) * (h.len + 1));
+	h.line[h.len] = '\0';
 	h.i = 0;
 	h.k = 0;
 	while (line[h.i])
@@ -83,7 +84,9 @@ char	*store_new_line(char *line, t_data *data)
 				(h.line)[h.k++] = (h.linetwo)[h.j++];
 		}
 		else
+		{
 			(h.line)[h.k++] = line[h.i++];
+		}
 	}
 	return (h.line);
 }

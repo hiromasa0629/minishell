@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 15:26:10 by hyap              #+#    #+#              #
-#    Updated: 2022/08/11 13:16:29 by hyap             ###   ########.fr        #
+#    Updated: 2022/08/16 22:21:04 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,15 @@ LIB = -L ./lib -lreadline -L ./readline-8.1/lib
 
 RM = rm -f
 
+LEAKS = -g -fsanitize=address
+
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(LIB) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(LEAKS) $(LIB) $(OBJ) -o $(NAME)
 
 test: $(NAME)
 	./minishell
