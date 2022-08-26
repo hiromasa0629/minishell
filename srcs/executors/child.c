@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 20:24:30 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/13 09:53:30 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/26 19:48:04 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	multiple_sections_child(t_helper *h, t_data *data, t_list *seclst)
 	else if (h->fileout > -1)
 		dup2(h->fileout, STDOUT_FILENO);
 	if (ft_isimplemented(ellst))
-		run_builtins(data, ellst);
+		run_builtins(data, ellst, -1);
 	else
 		ft_execve(ellst, data->envp);
 	exit(status);
@@ -103,6 +103,11 @@ void	single_section(t_list *ellst, t_data *data)
 		exit(status);
 	}
 	else if (data->sec_count == 1 && ft_isimplemented(ellst))
-		run_builtins(data, ellst);
+	{
+		if (h.fileout > -1)
+			run_builtins(data, ellst, h.fileout);
+		else
+			run_builtins(data, ellst, 1);
+	}
 	close_files(&h);
 }

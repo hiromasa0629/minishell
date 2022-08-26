@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:58:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:47:54 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/26 19:47:04 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 t_exec	*construct_execve(t_list *ellst, char **envp);
 void	ft_execve(t_list *ellst, char **envp);
-void	run_builtins(t_data *data, t_list *ellst);
+void	run_builtins(t_data *data, t_list *ellst, int fd);
 void	close_files(t_helper *h);
 void	pipe_n_fork(t_helper *h, t_data *data, t_list *ellst);
 void	duptwo_files(t_helper *h);

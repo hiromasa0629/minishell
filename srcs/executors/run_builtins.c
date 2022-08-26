@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:25:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 11:59:02 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/26 20:04:45 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,21 @@ void	free_cmdlst(t_list *cmdlst)
 	}
 }
 
-void	run_builtins(t_data *data, t_list *ellst)
+void	write_echo_to_file(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	if (fd < 0)
+		fd = 1;
+	while (s[i])
+		write(fd, &s[i++], 1);
+	free(s);
+}
+
+void	run_builtins(t_data *data, t_list *ellst, int fd)
 {
 	char	*s;
 	t_list	*cmdlst;
@@ -57,7 +71,7 @@ void	run_builtins(t_data *data, t_list *ellst)
 	if (!cmdlst)
 		return ;
 	if (ft_strncmp(s, "echo", 4) == 0)
-		ft_echo(cmdlst);
+		write_echo_to_file(ft_echo(cmdlst), fd);
 	if (ft_strncmp(s, "cd", 2) == 0)
 		ft_cd(cmdlst, data);
 	if (ft_strncmp(s, "pwd", 3) == 0)

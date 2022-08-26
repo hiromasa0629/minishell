@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 21:02:16 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/13 09:53:38 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/26 20:08:59 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	close_files(t_helper *h)
 		close(h->tmpfilein);
 	}
 	if (h->tmpfileout > -1)
-	{	
-		dup2(h->tmpfileout, 1);
+	{
 		close(h->fileout);
+		dup2(h->tmpfileout, 1);
 		close(h->tmpfileout);
 	}
 }

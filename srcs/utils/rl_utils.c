@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:58:52 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:09:54 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/25 15:47:22 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	prompt_new_readline(void)
 
 void	prompt_error_readline(void)
 {
-	rl_on_new_line();
-	rl_replace_line("", 0);
 }
 
 void	ft_add_history(char *s)

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:51:39 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:08:58 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/24 21:47:39 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void	skip_empty_ele(t_section **section)
 	}
 }
 
+/*
+** line = readline's line
+*/
 void	ft_lexer(t_data *data, char *line, char **envp)
 {
 	t_list		*seclst;

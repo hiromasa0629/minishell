@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:59:32 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 10:34:26 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/26 19:35:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "./clib.h"
 # include "./utils.h"
 
-void	ft_echo(t_list *cmdlst);
+char	*ft_echo(t_list *cmdlst);
 void	ft_pwd(t_data *data);
 void	ft_env(t_data *data);
 void	ft_export(t_data *data, t_list *cmdlst);

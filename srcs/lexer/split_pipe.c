@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:57:50 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:09:08 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/24 21:48:40 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,6 @@ void	store_section(t_data *data, char **line)
 
 void	split_pipe(t_data *data, char *line)
 {
-	int		pos;
-	int		start;
-	int		quote;
-
-	pos = 0;
-	quote = 0;
-	start = 0;
 	data->sec_count = 1;
 	data->seclst = NULL;
 	while (*line)

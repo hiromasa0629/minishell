@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:39:29 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 15:54:36 by hyap             ###   ########.fr       */
+/*   Updated: 2022/08/26 20:10:03 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_sec_content(void *content)
 	t_section	*sec;
 
 	sec = (t_section *)content;
-	printf("%ssec[%d]: %s\n", BLUE, sec->numth, sec->sec);
+	dprintf(2, "%ssec[%d]: %s %s\n", BLUE, sec->numth, sec->sec, WHITE);
 }
 
 void	print_ele_content(void *content)
@@ -41,8 +41,8 @@ void	print_ele_content(void *content)
 		type = "DELIMITER";
 	else if (ele->type == TYPE_EMPTY)
 		type = "EMPTY";
-	printf("%ssec[%d]ele[%d]: %s, type: %s\n", GREEN, ele->parent, ele->numth, \
-		ele->ele, type);
+	dprintf(2, "%ssec[%d]ele[%d]: %s, type: %s %s\n", GREEN, ele->parent, \
+		ele->numth, ele->ele, type, WHITE);
 }
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
