@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:30:22 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/01 09:26:56 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,21 @@
 # include "../readline-8.1/include/readline/history.h"
 # include "../readline-8.1/include/readline/readline.h"
 
-typedef struct s_data t_data;
-typedef struct s_section t_section;
-typedef struct s_element t_element;
-typedef struct s_list t_list;
-typedef struct s_helper t_helper;
-typedef struct s_exec t_exec;
-typedef struct stat t_stat;
-typedef struct termios t_termios;
-typedef struct s_cmd t_cmd;
+typedef struct s_data		t_data;
+typedef struct s_section	t_section;
+typedef struct s_element	t_element;
+typedef struct s_list		t_list;
+typedef struct s_helper		t_helper;
+typedef struct s_exec		t_exec;
+typedef struct stat			t_stat;
+typedef struct termios		t_termios;
+typedef struct s_cmd		t_cmd;
+typedef struct s_status		t_status;
+
+struct s_status {
+	int	status;
+	int	in_cmds;
+};
 
 struct s_list {
 	void	*content;
@@ -52,6 +58,7 @@ struct s_data {
 	int			tmpstdout;
 	int			tmpstdin;
 	int			is_tester;
+	int			running_cmds;
 };
 
 struct s_section {

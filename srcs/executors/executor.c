@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:39:10 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/13 09:53:00 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/01 09:30:03 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_executor(t_data *data)
 	data->pipeout = -1;
 	data->tmpstdin = -1;
 	data->tmpstdout = -1;
+	data->running_cmds = 1;
+	g_status.in_cmds = 1;
 	if (data->sec_count > 1)
 	{
 		while (seclst)
@@ -33,7 +35,7 @@ void	ft_executor(t_data *data)
 	}
 	else
 		single_section(((t_section *)seclst->content)->ellst, data);
-	while (waitpid(-1, &status, 0) > 0)
+	while (waitpid(-1, &(g_status.status), 0) > 0)
 		;
-	status = WEXITSTATUS(status);
+	g_status.status = WEXITSTATUS(g_status.status);
 }

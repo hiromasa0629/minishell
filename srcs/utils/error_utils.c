@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 13:55:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:31:40 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/01 09:29:39 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	is_good(char *s, t_data *data)
 		if (!data->is_tester)
 			free(s);
 		print_err(error_msg(err_code), prompt_error_readline);
-		status = 1;
+		g_status.status = 1;
 		return (0);
 	}
 	return (err_code);

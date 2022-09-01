@@ -23,6 +23,9 @@
 	"editor.minimap.enabled": false,
 	"editor.autoIndent": false,
 	"files.associations": {
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }

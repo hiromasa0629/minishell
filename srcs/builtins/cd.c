@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 16:22:07 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/13 08:50:59 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/01 09:28:17 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ void	ft_cd(t_list *cmdlst, t_data *data)
 		path = ((t_cmd *)cmdlst->content)->s;
 	if (chdir(path) == -1)
 	{
-		status = errno;
+		g_status.status = errno;
 		perror("cd");
 	}
 	else
 	{
-		status = 0;
+		g_status.status = 0;
 		edit_env_pwd(data);
 	}
 }

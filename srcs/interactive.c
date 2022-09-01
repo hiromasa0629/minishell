@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/11 16:47:34 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/01 09:31:01 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	eof_exit(char *s)
 	}
 }
 
-void	register_signal(void)
+void	register_signal()
 {
 	t_termios	termios;
 	int			rc;
