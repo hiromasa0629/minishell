@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 17:19:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:28:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:10:15 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_exit(t_data *data, t_list *cmdlst)
 		builtins_error("Numeric argument required\n");
 		exit_error(data, 255);
 	}
-	g_status.status = ft_atoi(((t_cmd *)cmdlst->content)->s);
+	g_status = ft_atoi(((t_cmd *)cmdlst->content)->s);
 	h.len = 0;
 	while (cmdlst)
 	{
@@ -36,5 +36,5 @@ void	ft_exit(t_data *data, t_list *cmdlst)
 	if (h.len > 1)
 		builtins_error("Too many arguments\n");
 	else
-		exit_error(data, g_status.status);
+		exit_error(data, g_status);
 }

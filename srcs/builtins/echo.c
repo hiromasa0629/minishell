@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 18:02:35 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:28:21 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:10:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ char	*ft_echo(t_list *cmdlst)
 			break ;
 		h.tmplst = h.tmplst->next;
 	}
-	g_status.status = 0;
+	g_status = 0;
 	return (echo_string(h.tmplst, has_nl));
 }

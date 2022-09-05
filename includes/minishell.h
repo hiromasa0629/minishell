@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:38:11 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:27:16 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:09:31 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@
 # define CYAN "\033[0;36m"
 
 /* Execve return status */
-// int	g_status;
-t_status	g_status;
+int	g_status;
 
 /*Signal handling*/
 void	register_signal(void);

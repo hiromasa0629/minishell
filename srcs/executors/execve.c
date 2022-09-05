@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:15:14 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:29:12 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:10:59 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,10 @@ void	ft_execve(t_list *ellst, char **envp)
 	h.line = exec->b_path;
 	if (execve(exec->b_path, exec->args, envp) == -1)
 	{
-		g_status.status = errno;
+		g_status = errno;
 		perror("execve");
 	}
 	else
-		g_status.status = 0;
+		g_status = 0;
 	free(exec);
 }

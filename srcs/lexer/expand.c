@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:04 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:29:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:13:06 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	total_new_element_length(char *s, char **envp)
 		if (ft_isexpandable(h.quote, s, h.i))
 		{
 			if (s[h.i + 1] == '?')
-				h.len += ft_strlen(ft_itoa(g_status.status));
+				h.len += ft_strlen(ft_itoa(g_status));
 			else
 				h.len += ft_strlen(find_env(envp, s, &h.i));
 		}
@@ -97,7 +97,7 @@ void	store_new_ele(char **envp, char **new_ele, char *s, t_helper *par_h)
 	if (s[par_h->i] == '$' && s[par_h->i + 1] == '?')
 	{
 		h.i = 0;
-		h.line = ft_itoa(g_status.status);
+		h.line = ft_itoa(g_status);
 		while ((h.line)[h.i])
 			(*new_ele)[(par_h->j)++] = (h.line)[h.i++];
 		free(h.line);

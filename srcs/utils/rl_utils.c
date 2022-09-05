@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:58:52 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:31:16 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:08:51 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 void	prompt_new_readline(void)
 {
 	printf("\n");
-	if (g_status.in_cmds == 0)
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}	
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 void	prompt_error_readline(void)

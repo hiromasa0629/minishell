@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 15:35:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:12:43 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,11 @@ void	eof_exit(char *s)
 	}
 }
 
-void	handle_sigquit(int signum)
-{
-	(void)signum;
-	if (g_status.in_cmds)
-	{
-		ft_putstr_fd(1, "Quit: 3\n");
-		g_status.status = 131;
-	}
-	else
-	{
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
+// void	handle_sigquit(int signum)
+// {
+// 	(void)signum;
+// 	return 
+// }
 
 void	register_signal(void)
 {
@@ -51,5 +42,5 @@ void	register_signal(void)
 	termios.c_lflag &= ~ECHOCTL;
 	rc = tcsetattr(0, 0, &termios);
 	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 }

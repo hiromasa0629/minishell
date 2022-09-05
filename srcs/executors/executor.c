@@ -6,11 +6,32 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 14:39:10 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:30:03 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:15:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	handle_restore_sigint(int signum)
+{
+	(void)signum;
+	ft_putstr_fd(1, "\n");
+	return ;
+}
+
+void	handle_restore_sigqiut(int signum)
+{
+	(void)signum;
+	ft_putstr_fd(1, "Quit: 3\n");
+	g_status = 131;
+	return ;
+}
+
+void	restore_signal(void)
+{
+	signal(SIGINT, handle_restore_sigint);
+	signal(SIGQUIT, handle_restore_sigqiut);
+}
 
 void	ft_executor(t_data *data)
 {
@@ -22,8 +43,7 @@ void	ft_executor(t_data *data)
 	data->pipeout = -1;
 	data->tmpstdin = -1;
 	data->tmpstdout = -1;
-	data->running_cmds = 1;
-	g_status.in_cmds = 1;
+	restore_signal();
 	if (data->sec_count > 1)
 	{
 		while (seclst)
@@ -35,7 +55,7 @@ void	ft_executor(t_data *data)
 	}
 	else
 		single_section(((t_section *)seclst->content)->ellst, data);
-	while (waitpid(-1, &(g_status.status), 0) > 0)
+	while (waitpid(-1, &(g_status), 0) > 0)
 		;
-	g_status.status = WEXITSTATUS(g_status.status);
+	g_status = WEXITSTATUS(g_status);
 }

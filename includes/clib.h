@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:26:56 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:09:41 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ typedef struct s_exec		t_exec;
 typedef struct stat			t_stat;
 typedef struct termios		t_termios;
 typedef struct s_cmd		t_cmd;
-typedef struct s_status		t_status;
-
-struct s_status {
-	int	status;
-	int	in_cmds;
-};
 
 struct s_list {
 	void	*content;

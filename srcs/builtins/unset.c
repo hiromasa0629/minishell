@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:21:58 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/01 09:28:38 by hyap             ###   ########.fr       */
+/*   Updated: 2022/09/05 14:10:28 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_unset(t_data *data, t_list *cmdlst)
 		if (!ft_isalpha((cmd->s)[0]) || ft_has_special_unset(cmd->s))
 		{
 			ft_putstr_fd(2, "Invalid identifier\n");
-			g_status.status = 1;
+			g_status = 1;
 			return ;
 		}
 		if (is_key_exist(data, cmd->s))
