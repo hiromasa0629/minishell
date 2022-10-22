@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:58:22 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:31:56 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/22 14:30:24 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ int		ft_atoi(const char *s);
 void	exit_error(t_data *data, int err);
 int		ft_has_special_unset(char *s);
 int		ft_has_special_export(char *s);
+int		ft_strcmp(const char *s1, const char *s2);
+void	free_splits(char **splits);
 
 #endif

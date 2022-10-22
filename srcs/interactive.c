@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/05 14:12:43 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/13 14:18:41 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ void	eof_exit(char *s)
 		exit(1);
 	}
 }
-
-// void	handle_sigquit(int signum)
-// {
-// 	(void)signum;
-// 	return 
-// }
 
 void	register_signal(void)
 {

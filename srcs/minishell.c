@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/05 14:14:53 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/22 15:02:45 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_minishell(t_data *data)
 		data->running_cmds = 0;
 		data->tmpstdin = -1;
 		data->tmpstdout = -1;
-		line = readline("minishell>");
+		line = readline("\033[0;32mminishell$\033[0;37m");
 		eof_exit(line);
 		if (*line == '\0')
 		{

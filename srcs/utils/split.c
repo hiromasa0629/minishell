@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:21:03 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/06 14:38:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/22 15:19:10 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,14 @@ char	**ft_split(char *s, char c)
 	while (*s)
 		split[i++] = store_string(&s, c);
 	return (split);
+}
+
+void	free_splits(char **splits)
+{
+	int	i;
+
+	i = 0;
+	while (splits[i])
+		free(splits[i++]);
+	free(splits);
 }

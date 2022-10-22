@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:21:58 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/05 14:10:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/22 14:38:35 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int	new_env_len(t_data *data, char *s)
 	h.i = 0;
 	h.len = 0;
 	while ((data->envp)[h.i])
-		if (ft_strncmp((data->envp)[h.i++], s, ft_strlen(s)) != 0)
+	{
+		h.dptr = ft_split((data->envp)[h.i++], '=');
+		if (ft_strcmp((h.dptr)[0], s) != 0)
 			h.len++;
+		free_splits(h.dptr);
+	}
 	return (h.len);
 }
 
@@ -32,8 +36,10 @@ void	realloc_envp_unset(t_data *data, char **dptr, char *s)
 	h.j = 0;
 	while ((data->envp)[h.i])
 	{
-		if (ft_strncmp((data->envp)[h.i], s, ft_strlen(s)) == 0)
+		h.dptr = ft_split((data->envp)[h.i], '=');
+		if (ft_strcmp((h.dptr)[0], s) == 0)
 			free((data->envp)[h.i++]);
+		free_splits(h.dptr);
 		if (!(data->envp)[h.i])
 			break ;
 		h.len = ft_strlen((data->envp)[h.i]);
