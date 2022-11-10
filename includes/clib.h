@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:11:19 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/05 14:09:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 13:21:19 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ struct s_list {
 	t_list	*prev;
 };
 
+struct s_exec {
+	char	*b_path;
+	char	**args;
+};
+
 struct s_data {
 	int			sec_count;
 	char		**envp;
@@ -53,6 +58,8 @@ struct s_data {
 	int			tmpstdin;
 	int			is_tester;
 	int			running_cmds;
+	char		*line;
+	t_exec		*tmpexec;
 };
 
 struct s_section {
@@ -97,11 +104,6 @@ struct s_helper {
 	char	*linethree;
 	char	**dptr;
 	t_list	*tmplst;
-};
-
-struct s_exec {
-	char	*b_path;
-	char	**args;
 };
 
 struct s_cmd {

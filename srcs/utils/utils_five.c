@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 14:27:08 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/12 12:15:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 13:56:33 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ int	ft_atoi(const char *s)
 
 void	exit_error(t_data *data, int err)
 {
+	int	i;
+
+	i = 0;
+	while ((data->envp)[i])
+		free((data->envp)[i++]);
+	free(data->envp);
 	free_all(data);
 	exit(err);
 }

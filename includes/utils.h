@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 15:58:22 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/22 14:30:24 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 12:11:08 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	print_err(char *s, void (*prompt)(void));
 
 /* Free */
 void	free_all(t_data *data);
+void	free_execve(t_exec *exec);
 
 /* List utils */
 t_list	*ft_lstnew(void *content);

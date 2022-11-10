@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 15:26:10 by hyap              #+#    #+#              #
-#    Updated: 2022/08/30 17:30:04 by hyap             ###   ########.fr        #
+#    Updated: 2022/11/10 11:50:38 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ LEAKS = -g -fsanitize=address
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(LEAKS) $(LIB) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIB) $(OBJ) -o $(NAME)
 
 test: $(NAME)
 	./minishell

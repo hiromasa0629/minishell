@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 15:15:14 by hyap              #+#    #+#             */
-/*   Updated: 2022/09/05 14:10:59 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 13:24:41 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,16 +126,12 @@ t_exec	*construct_execve(t_list *ellst, char **envp)
 void	ft_execve(t_list *ellst, char **envp)
 {
 	t_exec		*exec;
-	t_helper	h;
 
 	exec = construct_execve(ellst, envp);
-	h.line = exec->b_path;
 	if (execve(exec->b_path, exec->args, envp) == -1)
 	{
 		g_status = errno;
+		free_execve(exec);
 		perror("execve");
 	}
-	else
-		g_status = 0;
-	free(exec);
 }

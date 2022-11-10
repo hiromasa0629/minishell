@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 16:25:45 by hyap              #+#    #+#             */
-/*   Updated: 2022/08/30 20:31:49 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 13:56:26 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,12 @@ t_list	*construct_cmd(t_list *ellst)
 	return (cmdlst);
 }
 
-void	free_cmdlst(t_list *cmdlst)
+void	free_cmdlst(void *content)
 {
-	t_list	*tmp;
+	t_cmd	*cmd;
 
-	while (cmdlst)
-	{
-		tmp = cmdlst->next;
-		free(cmdlst);
-		cmdlst = tmp;
-	}
+	cmd = (t_cmd *)content;
+	free(cmd);
 }
 
 void	write_echo_to_file(char *s, int fd)
@@ -84,5 +80,5 @@ void	run_builtins(t_data *data, t_list *ellst, int fd)
 		ft_env(data);
 	if (ft_strncmp(s, "exit", 4) == 0)
 		ft_exit(data, cmdlst);
-	free_cmdlst(cmdlst);
+	ft_lstclear(&cmdlst, free_cmdlst);
 }

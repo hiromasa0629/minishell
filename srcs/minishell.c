@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:37:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/22 15:02:45 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 13:24:25 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_minishell(t_data *data)
 {
 	char	*line;
 
+	realloc_initial_envp(data);
 	while (1)
 	{
 		register_signal();
@@ -73,12 +74,11 @@ void	ft_minishell(t_data *data)
 		ft_add_history(line);
 		if (!is_good(line, data))
 			continue ;
-		realloc_initial_envp(data);
+		data->line = line;
 		ft_lexer(data, line, data->envp);
 		ft_parser(data);
 		ft_executor(data);
 		free_all(data);
-		free(line);
 	}
 }
 
